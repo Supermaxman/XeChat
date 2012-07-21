@@ -47,7 +47,7 @@ public class localExecutor extends baseExecutor {
 
         } else if (args.length == 0) {
             XeChat.channelIn.put(player, XeChat.l);
-            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + ChatColor.YELLOW + "Local" + ChatColor.AQUA + ".");
+            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + XeChat.l.getColor() + XeChat.l.getName() + ChatColor.AQUA + ".");
         }
     }
 

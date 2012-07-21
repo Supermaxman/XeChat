@@ -13,5 +13,11 @@ commands:
         description: Switch to trade chat.
         usage: /<command>
     z:
-        description: Switch to trade chat.
+        description: Switch to staff chat.
+        usage: /<command>
+    create:
+        description: Create channels
+        usage: /<command>
+    join:
+        description: Join channels
         usage: /<command>

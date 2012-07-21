@@ -124,7 +124,6 @@ public class XeChatListener implements Listener {
                 }
             }
             
-            p.sendMessage(message);
             event.getRecipients().clear();
         }
     }
