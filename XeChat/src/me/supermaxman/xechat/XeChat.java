@@ -53,6 +53,7 @@ public class XeChat extends JavaPlugin {
     @Override
     public void onEnable() {
         log = getLogger();
+        conf = getConfig();
         if (!setupPermissions() || !setupChat()) {
             log.severe("Vault fail!");
             this.setEnabled(false);
@@ -61,7 +62,6 @@ public class XeChat extends JavaPlugin {
         setupChannels();
         getServer().getPluginManager().registerEvents(Listener, this);
         setupConfig();
-        conf = getConfig();
 
         log.info("All systems go! Version:" + this.getDescription().getVersion());
 
@@ -75,6 +75,7 @@ public class XeChat extends JavaPlugin {
         getCommand("delete").setExecutor(new channelDeleteExecutor(this));
 
         setupIRC();
+        
     }
     
 

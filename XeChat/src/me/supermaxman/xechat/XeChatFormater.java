@@ -12,6 +12,7 @@ public class XeChatFormater {
         name = dcolor + XeChat.chat.getPlayerPrefix(p).replaceAll("&", "§") + name + dcolor + ":";
         
         String ch = dcolor + "[" + dcolor + channel.getName() + dcolor + "]";
+        
         if (XeChat.conf.getBoolean("worldinchat")) {
             return (String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m));
 

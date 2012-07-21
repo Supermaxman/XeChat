@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -29,15 +30,17 @@ public class XeChatListener implements Listener {
         }
         event.setJoinMessage(player.getName() + " Joined the game!");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getJoinMessage()));
+        
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         event.setQuitMessage(event.getPlayer().getName() + " Quit!");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getQuitMessage()));
+        
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(PlayerChatEvent event) {
         Player p = event.getPlayer();
         if (!XeChat.channelIn.containsKey(p)) {
