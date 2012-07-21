@@ -60,11 +60,10 @@ public class XeChat extends JavaPlugin {
         }
         setupChannels();
         getServer().getPluginManager().registerEvents(Listener, this);
-
+        setupConfig();
         conf = getConfig();
 
         log.info("All systems go! Version:" + this.getDescription().getVersion());
-        setupConfig();
 
 
         getCommand("l").setExecutor(new localExecutor(this));
