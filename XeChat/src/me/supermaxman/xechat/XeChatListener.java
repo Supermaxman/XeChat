@@ -59,7 +59,9 @@ public class XeChatListener implements Listener {
 
             event.setFormat(message);
 
-            XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(name + ": " + m));
+            if(!m.equalsIgnoreCase("u00a74u00a75u00a73u00a74v|1")){
+                XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(name + ": " + m));
+            }
         } else if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("l")) {
             String m = event.getMessage();
             String name = p.getName();
