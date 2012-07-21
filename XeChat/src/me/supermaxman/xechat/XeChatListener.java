@@ -77,7 +77,7 @@ public class XeChatListener implements Listener {
 
             //String ch = XeChat.conf.getString("defaultChannel");
 
-            String message = XeChatFormater.format(p, m, name, world, XeChat.g);
+            String message = XeChatFormater.format(p, m, name, world, XeChat.trade);
 
             event.setFormat(message);
         }
