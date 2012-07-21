@@ -43,9 +43,9 @@ public class XeChatListener implements Listener {
             XeChat.channelIn.put(p, XeChat.g);
         }
         
-        if(!XeChat.channels.containsKey(XeChat.channelIn.get(p))){
-        	XeChat.channelIn.put(p, XeChat.g);
-        }
+        //if(!XeChat.channels.containsKey(XeChat.channelIn.get(p))){
+        	//XeChat.channelIn.put(p, XeChat.g);
+        //}
         
         
         if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
