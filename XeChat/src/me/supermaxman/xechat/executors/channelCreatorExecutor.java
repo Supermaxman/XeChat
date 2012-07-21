@@ -19,7 +19,11 @@ public class channelCreatorExecutor extends baseExecutor {
             String name = player.getName();
             ChatColor color = ChatColor.WHITE;
             if(args.length>=2){
-            	//add custom channel colors
+            	try{
+            		color = ChatColor.valueOf(args[1].toUpperCase());
+            	}catch(IllegalArgumentException e){
+                    player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, Specified Chat Color Does Not Exist, Defaulting to White.");
+            	}
             }
             
             XeChannel channel = new XeChannel(channelName, name, color);
@@ -28,11 +32,15 @@ public class channelCreatorExecutor extends baseExecutor {
                 list.add(XeChat.g);
                 XeChat.channelsOn.put(player, list);
                 }
-            
-            XeChat.channelsOn.get(player).add(channel);
-            XeChat.channels.put(channelName, channel);
-            XeChat.channelIn.put(player, channel);
-            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  channel.getColor()+channel.getName() + ChatColor.AQUA + ".");
+            if(!XeChat.channels.containsKey(channelName)){
+                XeChat.channelsOn.get(player).add(channel);
+                XeChat.channels.put(channelName, channel);
+                XeChat.channelIn.put(player, channel);
+                player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  channel.getColor()+channel.getName() + ChatColor.AQUA + ".");
+            }else{
+                player.sendMessage(ChatColor.RED + "[XeChat]: Channel "+channelName+" Already Exists.");
+            }
+
         } else if (args.length == 0) {
         	
             player.sendMessage(ChatColor.RED + "[XeChat]: SYNTAX ERROR, type /create [ChannelName] <Color>.");
