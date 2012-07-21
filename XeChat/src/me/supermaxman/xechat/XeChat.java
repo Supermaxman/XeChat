@@ -3,6 +3,7 @@ package me.supermaxman.xechat;
 import me.supermaxman.xechat.executors.globalExecutor;
 import me.supermaxman.xechat.executors.localExecutor;
 import me.supermaxman.xechat.executors.tradeExecutor;
+import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ public class XeChat extends JavaPlugin {
     public static FileConfiguration conf;
     private final XeChatListener Listener = new XeChatListener(this);
     public static Permission permission = null;
+    public static Chat chat = null;
     public static final HashMap<Player, String> channelIn = new HashMap<Player, String>();
     public static final HashMap<Player, List<String>> channelsOn = new HashMap<Player, List<String>>();
 
@@ -33,8 +35,8 @@ public class XeChat extends JavaPlugin {
     @Override
     public void onEnable() {
         log = getLogger();
-        if (!setupPermissions()) {
-            log.severe("Could not find a permissions connector!");
+        if (!setupPermissions() || !setupChat()) {
+            log.severe("Vault fail!");
             this.setEnabled(false);
             return;
         }
@@ -72,6 +74,15 @@ public class XeChat extends JavaPlugin {
         RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
         if (permissionProvider != null) {
             permission = permissionProvider.getProvider();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean setupChat() {
+        RegisteredServiceProvider<Chat> chatRegisteredServiceProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
+        if (chatRegisteredServiceProvider != null) {
+            chat = chatRegisteredServiceProvider.getProvider();
             return true;
         }
         return false;

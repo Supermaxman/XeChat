@@ -15,16 +15,12 @@ public class XeChatFormater {
         }
 
 
-        ChatColor color = ChatColor.GRAY;
-
-
-        if (p.isOp()) {
-            color = ChatColor.DARK_RED;
-        } else if (group.equalsIgnoreCase("admin")) {
-            color = ChatColor.GOLD;
-        }
-
-        name = dcolor + "[" + color + name + dcolor + "]: ";
+//        if (p.isOp()) {
+//            color = ChatColor.DARK_RED;
+//        } else if (group.equalsIgnoreCase("admin")) {
+//            color = ChatColor.GOLD;
+//        }
+        name = dcolor + XeChat.chat.getPlayerPrefix(p) + name + dcolor + ": ";
         ch = dcolor + "[" + dcolor + ch + dcolor + "]";
 
         return (ch + worldchat + name + m);
