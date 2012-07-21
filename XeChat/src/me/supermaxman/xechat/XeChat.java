@@ -1,10 +1,6 @@
 package me.supermaxman.xechat;
 
-import java.util.HashMap;
-import java.util.List;
-
 import net.milkbowl.vault.permission.Permission;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -12,8 +8,10 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class XeChat extends JavaPlugin implements Listener{
-	//derp
 	//Required
 	public static XeChat plugin;
 	public static FileConfiguration conf;
@@ -23,7 +21,8 @@ public class XeChat extends JavaPlugin implements Listener{
 	public static HashMap<Player, String> channelIn = new HashMap<Player, String>();
 	public static HashMap<Player, List<String>> channelsOn = new HashMap<Player, List<String>>();
 	
-	
+     //herpus
+
 	@Override
 	public void onDisable() {System.out.println("XeChat Disabled.");}
 	@Override
