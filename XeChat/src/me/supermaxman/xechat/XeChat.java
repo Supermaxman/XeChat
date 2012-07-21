@@ -13,7 +13,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class XeChat extends JavaPlugin implements Listener{
-	//derp
+	
 	//Required
 	public static XeChat plugin;
 	public static FileConfiguration conf;
@@ -25,7 +25,7 @@ public class XeChat extends JavaPlugin implements Listener{
 	
 	
 	@Override
-	public void onDisable() {System.out.println("XeChat Disabled.");}
+	public void onDisable() {System.out.println("[XeChat]: Disabled.");}
 	@Override
 	public void onEnable() {
 		setupPermissions();
