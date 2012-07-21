@@ -5,6 +5,7 @@ import me.supermaxman.xechat.IRC.pircbot.IrcException;
 import me.supermaxman.xechat.IRC.pircbot.NickAlreadyInUseException;
 import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.executors.channelCreatorExecutor;
+import me.supermaxman.xechat.executors.channelDeleteExecutor;
 import me.supermaxman.xechat.executors.channelJoinExecutor;
 import me.supermaxman.xechat.executors.globalExecutor;
 import me.supermaxman.xechat.executors.localExecutor;
@@ -72,7 +73,8 @@ public class XeChat extends JavaPlugin {
         getCommand("z").setExecutor(new staffExecutor(this));
         getCommand("create").setExecutor(new channelCreatorExecutor(this));
         getCommand("join").setExecutor(new channelJoinExecutor(this));
-        
+        getCommand("delete").setExecutor(new channelDeleteExecutor(this));
+
         setupIRC();
     }
     

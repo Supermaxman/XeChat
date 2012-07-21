@@ -21,3 +21,6 @@ commands:
     join:
         description: Join channels
         usage: /<command>
+    delete:
+        description: Deletes channels
+        usage: /<command>
