@@ -46,9 +46,9 @@ public class XeChatListener implements Listener {
             String name = p.getName();
             String world = p.getWorld().getName();
 
-            String ch = XeChat.conf.getString("defaultChannel");
+            //String ch = XeChat.conf.getString("defaultChannel");
 
-            String message = XeChatFormater.format(p, m, name, world, ch, ChatColor.WHITE);
+            String message = XeChatFormater.format(p, m, name, world, XeChat.g);
 
             event.setFormat(message);
 
@@ -57,9 +57,8 @@ public class XeChatListener implements Listener {
             String m = event.getMessage();
             String name = p.getName();
             String world = p.getWorld().getName();
-
-            String ch = ChatColor.YELLOW + "l";
-            String message = XeChatFormater.format(p, m, name, world, ch, ChatColor.YELLOW);
+            
+            String message = XeChatFormater.format(p, m, name, world,  XeChat.l);
 
             for (Entity e : p.getNearbyEntities(XeChat.conf.getInt("localdistence"), 300, XeChat.conf.getInt("localdistence"))) {
                 if (e instanceof Player) {

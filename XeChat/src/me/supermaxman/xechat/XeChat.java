@@ -3,11 +3,14 @@ package me.supermaxman.xechat;
 import me.supermaxman.xechat.IRC.ircBot;
 import me.supermaxman.xechat.IRC.pircbot.IrcException;
 import me.supermaxman.xechat.IRC.pircbot.NickAlreadyInUseException;
+import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.executors.globalExecutor;
 import me.supermaxman.xechat.executors.localExecutor;
 import me.supermaxman.xechat.executors.tradeExecutor;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
+
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -29,7 +32,11 @@ public class XeChat extends JavaPlugin {
     public static final HashMap<Player, String> channelIn = new HashMap<Player, String>();
     public static final HashMap<Player, List<String>> channelsOn = new HashMap<Player, List<String>>();
     static ircBot bot;
-
+    public static XeChannel g = new XeChannel("G", "server", ChatColor.WHITE);
+    public static XeChannel l = new XeChannel("l", "server", ChatColor.YELLOW);
+    public static XeChannel trade = new XeChannel("trade", "server", ChatColor.BLUE);
+    public static XeChannel z = new XeChannel("z", "server", ChatColor.GREEN);
+    
     @Override
     public void onDisable() {
         log.info("Disabled.");

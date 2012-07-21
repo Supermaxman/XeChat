@@ -29,12 +29,10 @@ public class tradeExecutor extends baseExecutor {
             }
             String name = player.getName();
             String world = player.getWorld().getName();
-
-
-            String ch = ChatColor.BLUE + "t";
-
-
-            String message = XeChatFormater.format(player, m, name, world, ch, ChatColor.BLUE);
+            
+            
+            
+            String message = XeChatFormater.format(player, m, name, world, XeChat.trade);
             if (!XeChat.channelsOn.containsKey(player)) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add("G");
@@ -53,7 +51,7 @@ public class tradeExecutor extends baseExecutor {
         } else if (args.length == 0) {
             XeChat.channelIn.put(player, "t");
 
-            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + ChatColor.BLUE + "Trade" + ChatColor.AQUA + ".");
+            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  XeChat.trade.getColor()+XeChat.trade.getName() + ChatColor.AQUA + ".");
         }
     }
 

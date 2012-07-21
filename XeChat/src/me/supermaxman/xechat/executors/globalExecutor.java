@@ -16,7 +16,7 @@ public class globalExecutor extends baseExecutor {
             player.sendMessage(ChatColor.RED + "[XeChat]: Error, type /g to talk in global.");
         } else if (args.length == 0) {
             XeChat.channelIn.put(player, "G");
-            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + ChatColor.WHITE + "Global" + ChatColor.AQUA + ".");
+            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + XeChat.g.getColor()+XeChat.g.getName() + ChatColor.AQUA + ".");
         }
     }
 
