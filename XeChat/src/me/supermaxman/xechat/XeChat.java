@@ -4,6 +4,7 @@ import me.supermaxman.xechat.IRC.ircBot;
 import me.supermaxman.xechat.IRC.pircbot.IrcException;
 import me.supermaxman.xechat.IRC.pircbot.NickAlreadyInUseException;
 import me.supermaxman.xechat.Objects.XeChannel;
+import me.supermaxman.xechat.executors.channelCreatorExecutor;
 import me.supermaxman.xechat.executors.globalExecutor;
 import me.supermaxman.xechat.executors.localExecutor;
 import me.supermaxman.xechat.executors.staffExecutor;
@@ -18,6 +19,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -30,13 +32,14 @@ public class XeChat extends JavaPlugin {
     private final XeChatListener Listener = new XeChatListener(this);
     public static Permission permission = null;
     public static Chat chat = null;
-    public static final HashMap<Player, String> channelIn = new HashMap<Player, String>();
-    public static final HashMap<Player, List<String>> channelsOn = new HashMap<Player, List<String>>();
+    public static final HashMap<Player, XeChannel> channelIn = new HashMap<Player, XeChannel>();
+    public static final HashMap<Player, List<XeChannel>> channelsOn = new HashMap<Player, List<XeChannel>>();
     static ircBot bot;
     public static XeChannel g = new XeChannel("G", "server", ChatColor.WHITE);
     public static XeChannel l = new XeChannel("l", "server", ChatColor.YELLOW);
     public static XeChannel trade = new XeChannel("trade", "server", ChatColor.BLUE);
     public static XeChannel z = new XeChannel("z", "server", ChatColor.DARK_GREEN);
+    public static ArrayList<XeChannel> channels = new ArrayList<XeChannel>();
     
     @Override
     public void onDisable() {
@@ -53,7 +56,7 @@ public class XeChat extends JavaPlugin {
             this.setEnabled(false);
             return;
         }
-
+        setupChannels();
         getServer().getPluginManager().registerEvents(Listener, this);
 
         conf = getConfig();
@@ -66,11 +69,22 @@ public class XeChat extends JavaPlugin {
         getCommand("g").setExecutor(new globalExecutor(this));
         getCommand("trade").setExecutor(new tradeExecutor(this));
         getCommand("z").setExecutor(new staffExecutor(this));
+        getCommand("create").setExecutor(new channelCreatorExecutor(this));
         
         setupIRC();
     }
+    
 
-
+    public void setupChannels(){
+    	channels.add(g);
+    	channels.add(l);
+    	channels.add(trade);
+    	channels.add(z);
+    	
+    }
+    
+    
+    
     void setupIRC() {
 
         bot = new ircBot(this);

@@ -1,5 +1,7 @@
 package me.supermaxman.xechat;
 
+import me.supermaxman.xechat.Objects.XeChannel;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -22,8 +24,8 @@ public class XeChatListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (!XeChat.channelsOn.containsKey(player)) {
-            ArrayList<String> list = new ArrayList<String>();
-            list.add("G");
+            ArrayList<XeChannel> list = new ArrayList<XeChannel>();
+            list.add(XeChat.g);
             XeChat.channelsOn.put(player, list);
         }
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getJoinMessage()));
@@ -38,10 +40,10 @@ public class XeChatListener implements Listener {
     public void onPlayerChat(PlayerChatEvent event) {
         Player p = event.getPlayer();
         if (!XeChat.channelIn.containsKey(p)) {
-            XeChat.channelIn.put(p, XeChat.g.getName());
+            XeChat.channelIn.put(p, XeChat.g);
         }
 
-        if (XeChat.channelIn.get(p).equalsIgnoreCase("G")) {
+        if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
             String m = event.getMessage();
             String name = p.getName();
             String world = p.getWorld().getName();
@@ -53,7 +55,7 @@ public class XeChatListener implements Listener {
             event.setFormat(message);
 
             XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(name + ": " + m));
-        } else if (XeChat.channelIn.get(p).equalsIgnoreCase("l")) {
+        } else if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("l")) {
             String m = event.getMessage();
             String name = p.getName();
             String world = p.getWorld().getName();
@@ -70,7 +72,7 @@ public class XeChatListener implements Listener {
             }
             p.sendMessage(message);
             event.getRecipients().clear();
-        } else if (XeChat.channelIn.get(p).equalsIgnoreCase("trade")) {
+        } else if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("trade")) {
         	String m = event.getMessage();
             String name = p.getName();
             String world = p.getWorld().getName();
@@ -88,7 +90,7 @@ public class XeChatListener implements Listener {
             
             p.sendMessage(message);
             event.getRecipients().clear();
-        } else if (XeChat.channelIn.get(p).equalsIgnoreCase("z")) {
+        } else if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("z")) {
         	String m = event.getMessage();
             String name = p.getName();
             String world = p.getWorld().getName();
@@ -99,6 +101,24 @@ public class XeChatListener implements Listener {
             for (Player r : p.getServer().getOnlinePlayers()) {
                 if (XeChat.channelsOn.containsKey(r)) {
                     if (XeChat.channelsOn.get(r).contains(XeChat.z.getName())) {
+                        r.sendMessage(message);
+                    }
+                }
+            }
+            
+            p.sendMessage(message);
+            event.getRecipients().clear();
+        }else{
+        	String m = event.getMessage();
+            String name = p.getName();
+            String world = p.getWorld().getName();
+            
+            //String ch = XeChat.conf.getString("defaultChannel");
+            
+            String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
+            for (Player r : p.getServer().getOnlinePlayers()) {
+                if (XeChat.channelsOn.containsKey(r)) {
+                    if (XeChat.channelsOn.get(r).contains(XeChat.channelIn.get(p))) {
                         r.sendMessage(message);
                     }
                 }

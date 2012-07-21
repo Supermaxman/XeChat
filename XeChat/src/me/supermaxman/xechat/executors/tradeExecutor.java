@@ -2,6 +2,8 @@ package me.supermaxman.xechat.executors;
 
 import me.supermaxman.xechat.XeChat;
 import me.supermaxman.xechat.XeChatFormater;
+import me.supermaxman.xechat.Objects.XeChannel;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -34,14 +36,14 @@ public class tradeExecutor extends baseExecutor {
             
             String message = XeChatFormater.format(player, m, name, world, XeChat.trade);
             if (!XeChat.channelsOn.containsKey(player)) {
-                ArrayList<String> list = new ArrayList<String>();
-                list.add("G");
+                ArrayList<XeChannel> list = new ArrayList<XeChannel>();
+                list.add(XeChat.g);
                 XeChat.channelsOn.put(player, list);
             }
-            XeChat.channelsOn.get(player).add(XeChat.trade.getName());
+            XeChat.channelsOn.get(player).add(XeChat.trade);
             for (Player r : player.getServer().getOnlinePlayers()) {
                 if (XeChat.channelsOn.containsKey(r)) {
-                    if (XeChat.channelsOn.get(r).contains(XeChat.trade.getName())) {
+                    if (XeChat.channelsOn.get(r).contains(XeChat.trade)) {
                         r.sendMessage(message);
                     }
                 }
@@ -49,7 +51,7 @@ public class tradeExecutor extends baseExecutor {
 
 
         } else if (args.length == 0) {
-            XeChat.channelIn.put(player, XeChat.trade.getName());
+            XeChat.channelIn.put(player, XeChat.trade);
 
             player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  XeChat.trade.getColor()+XeChat.trade.getName() + ChatColor.AQUA + ".");
         }

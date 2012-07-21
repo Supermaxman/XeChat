@@ -3,6 +3,7 @@ package me.supermaxman.xechat.IRC;
 import me.supermaxman.xechat.IRC.pircbot.IrcException;
 import me.supermaxman.xechat.IRC.pircbot.NickAlreadyInUseException;
 import me.supermaxman.xechat.IRC.pircbot.PircBot;
+import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.XeChat;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -11,6 +12,7 @@ import org.bukkit.plugin.Plugin;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ircBot extends PircBot {
     ChatColor color = ChatColor.GRAY;
@@ -111,9 +113,9 @@ public class ircBot extends PircBot {
     }
 
     void sendMessageToMain(String message) {
-        for (Map.Entry<Player, List<String>> entry : XeChat.channelsOn.entrySet()) {
-            List<String> chanList = entry.getValue();
-            if (chanList.contains("G")) {
+        for (Entry<Player, List<XeChannel>> entry : XeChat.channelsOn.entrySet()) {
+            List<XeChannel> chanList = entry.getValue();
+            if (chanList.contains(XeChat.g)) {
                 entry.getKey().sendMessage("[IRC] " + color + message);
             }
         }
