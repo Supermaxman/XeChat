@@ -13,32 +13,39 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class XeChat extends JavaPlugin implements Listener {
 
     //Required
-    public static XeChat plugin;
+    private static XeChat plugin;
+    private Logger log;
     public static FileConfiguration conf;
-    public XeChatListener Listener = new XeChatListener(this);
+    private final XeChatListener Listener = new XeChatListener(this);
     public static Permission permission = null;
-    public static HashMap<Player, String> channelIn = new HashMap<Player, String>();
-    public static HashMap<Player, List<String>> channelsOn = new HashMap<Player, List<String>>();
+    public static final HashMap<Player, String> channelIn = new HashMap<Player, String>();
+    public static final HashMap<Player, List<String>> channelsOn = new HashMap<Player, List<String>>();
 
     //herpus
 
     @Override
     public void onDisable() {
-        System.out.println("[XeChat]: Disabled.");
+        log.info("Disabled.");
     }
 
     @Override
     public void onEnable() {
-        setupPermissions();
+        log = getLogger();
+        if (!setupPermissions()) {
+            log.severe("Could not find a permissions connector!");
+            this.setEnabled(false);
+            return;
+        }
         getServer().getPluginManager().registerEvents(Listener, this);
         conf = getConfig();
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!");
-        this.plugin = this;
+        plugin = this;
         setupConfig();
 
 
@@ -49,7 +56,7 @@ public class XeChat extends JavaPlugin implements Listener {
         //getCommand("d").setExecutor(CommandExecutor);
     }
 
-    public void setupConfig() {
+    void setupConfig() {
         if (conf.get("worldinchat") == null) {
             conf.set("worldinchat", false);
         }

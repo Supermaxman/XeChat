@@ -3,7 +3,6 @@ package me.supermaxman.xechat.executors;
 import me.supermaxman.xechat.XeChat;
 import me.supermaxman.xechat.XeChatFormater;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -14,7 +13,7 @@ import org.bukkit.entity.Player;
  */
 public class localExecutor extends baseExecutor {
     @Override
-    protected void run(CommandSender sender, String[] args, Player player, String playerName) {
+    protected void run(Player player, String[] args) {
         if (args.length > 0) {
             String gn = XeChat.permission.getPrimaryGroup(player);
             String m = "";
@@ -34,7 +33,7 @@ public class localExecutor extends baseExecutor {
             String ch = ChatColor.YELLOW + "l";
 
 
-            String message = XeChatFormater.chatFormater(player, gn, m, name, world, ch, ChatColor.YELLOW);
+            String message = XeChatFormater.format(player, gn, m, name, world, ch, ChatColor.YELLOW);
 
 
             for (Entity e : player.getNearbyEntities((Integer) XeChat.conf.get("localdistence"), 300, (Integer) XeChat.conf.get("localdistence"))) {

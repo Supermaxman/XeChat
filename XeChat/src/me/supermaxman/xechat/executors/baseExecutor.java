@@ -6,11 +6,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public abstract class baseExecutor implements CommandExecutor {
-    protected static XeChat XE;
+abstract class baseExecutor implements CommandExecutor {
+    private static XeChat XE;
     // Permission permission = xEssentials.permission;
 
-    protected baseExecutor(XeChat XE) {
+    baseExecutor(XeChat XE) {
         this.XE = XE;
     }
 
@@ -18,21 +18,19 @@ public abstract class baseExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 //        final String commandName = command.getName().toLowerCase();
         Player player;
-        String playerName;
         final boolean isPlayer = (sender instanceof Player);
 
         if (isPlayer) {
             player = (Player) sender;
-            playerName = player.getName();
         } else {
             return false;
         }
 
-        this.run(sender, args, player, playerName);
+        this.run(player, args);
 
         return true;
     }
 
-    protected abstract void run(CommandSender sender, String[] args, Player player, String playerName);
+    protected abstract void run(Player player, String[] args);
 
 }

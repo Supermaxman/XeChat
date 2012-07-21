@@ -3,7 +3,6 @@ package me.supermaxman.xechat.executors;
 import me.supermaxman.xechat.XeChat;
 import me.supermaxman.xechat.XeChatFormater;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  */
 public class tradeExecutor extends baseExecutor {
     @Override
-    protected void run(CommandSender sender, String[] args, Player player, String playerName) {
+    protected void run(Player player, String[] args) {
         if (args.length > 0) {
             String gn = XeChat.permission.getPrimaryGroup(player);
             String m = "";
@@ -35,7 +34,7 @@ public class tradeExecutor extends baseExecutor {
             String ch = ChatColor.BLUE + "t";
 
 
-            String message = XeChatFormater.chatFormater(player, gn, m, name, world, ch, ChatColor.BLUE);
+            String message = XeChatFormater.format(player, gn, m, name, world, ch, ChatColor.BLUE);
             if (!XeChat.channelsOn.containsKey(player)) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add("G");

@@ -2,7 +2,6 @@ package me.supermaxman.xechat.executors;
 
 import me.supermaxman.xechat.XeChat;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -12,7 +11,7 @@ import org.bukkit.entity.Player;
  */
 public class globalExecutor extends baseExecutor {
     @Override
-    protected void run(CommandSender sender, String[] args, Player player, String playerName) {
+    protected void run(Player player, String[] args) {
         if (args.length > 0) {
             player.sendMessage(ChatColor.RED + "[XeChat]: Error, type /g to talk in global.");
         } else if (args.length == 0) {

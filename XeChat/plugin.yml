@@ -4,8 +4,11 @@ name: XeChat
 version: '1.0'
 commands:
     l:
-        description: 
+        description: Switch to local chat.
         usage: /<command>
     g:
-        description: 
+        description: Switch to global chat.
+        usage: /<command>
+    t:
+        description: Switch to trade chat.
         usage: /<command>
