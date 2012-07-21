@@ -7,14 +7,11 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-/**
- * User: Benjamin
- * Date: 21/07/12
- * Time: 05:24
- */
-public class tradeExecutor extends baseExecutor {
+
+public class staffExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
+    	if(XeChat.permission.has(player, "xechat.staff.chat")){
         if (args.length > 0) {
             String gn = XeChat.permission.getPrimaryGroup(player);
             String m = "";
@@ -32,16 +29,16 @@ public class tradeExecutor extends baseExecutor {
             
             
             
-            String message = XeChatFormater.format(player, m, name, world, XeChat.trade);
+            String message = XeChatFormater.format(player, m, name, world, XeChat.z);
             if (!XeChat.channelsOn.containsKey(player)) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add("G");
                 XeChat.channelsOn.put(player, list);
             }
-            XeChat.channelsOn.get(player).add(XeChat.trade.getName());
+            XeChat.channelsOn.get(player).add(XeChat.z.getName());
             for (Player r : player.getServer().getOnlinePlayers()) {
                 if (XeChat.channelsOn.containsKey(r)) {
-                    if (XeChat.channelsOn.get(r).contains(XeChat.trade.getName())) {
+                    if (XeChat.channelsOn.get(r).contains(XeChat.z.getName())) {
                         r.sendMessage(message);
                     }
                 }
@@ -49,13 +46,17 @@ public class tradeExecutor extends baseExecutor {
 
 
         } else if (args.length == 0) {
-            XeChat.channelIn.put(player, XeChat.trade.getName());
+            XeChat.channelIn.put(player, XeChat.z.getName());
 
-            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  XeChat.trade.getColor()+XeChat.trade.getName() + ChatColor.AQUA + ".");
+            player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  XeChat.z.getColor()+XeChat.z.getName() + ChatColor.AQUA + ".");
         }
+    	
+        
+    }else{
+        player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, You do not have permission to enter " +  XeChat.z.getColor()+XeChat.z.getName() + ChatColor.RED + ".");
     }
-
-    public tradeExecutor(XeChat XE) {
+    }
+    public staffExecutor(XeChat XE) {
         super(XE);
     }
 }

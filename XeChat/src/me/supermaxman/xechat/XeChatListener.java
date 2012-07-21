@@ -38,7 +38,7 @@ public class XeChatListener implements Listener {
     public void onPlayerChat(PlayerChatEvent event) {
         Player p = event.getPlayer();
         if (!XeChat.channelIn.containsKey(p)) {
-            XeChat.channelIn.put(p, "G");
+            XeChat.channelIn.put(p, XeChat.g.getName());
         }
 
         if (XeChat.channelIn.get(p).equalsIgnoreCase("G")) {
@@ -78,8 +78,34 @@ public class XeChatListener implements Listener {
             //String ch = XeChat.conf.getString("defaultChannel");
 
             String message = XeChatFormater.format(p, m, name, world, XeChat.trade);
+            for (Player r : p.getServer().getOnlinePlayers()) {
+                if (XeChat.channelsOn.containsKey(r)) {
+                    if (XeChat.channelsOn.get(r).contains(XeChat.trade.getName())) {
+                        r.sendMessage(message);
+                    }
+                }
+            }
+            
+            p.sendMessage(message);
+            event.getRecipients().clear();
+        } else if (XeChat.channelIn.get(p).equalsIgnoreCase("z")) {
+        	String m = event.getMessage();
+            String name = p.getName();
+            String world = p.getWorld().getName();
 
-            event.setFormat(message);
+            //String ch = XeChat.conf.getString("defaultChannel");
+
+            String message = XeChatFormater.format(p, m, name, world, XeChat.z);
+            for (Player r : p.getServer().getOnlinePlayers()) {
+                if (XeChat.channelsOn.containsKey(r)) {
+                    if (XeChat.channelsOn.get(r).contains(XeChat.z.getName())) {
+                        r.sendMessage(message);
+                    }
+                }
+            }
+            
+            p.sendMessage(message);
+            event.getRecipients().clear();
         }
     }
 
