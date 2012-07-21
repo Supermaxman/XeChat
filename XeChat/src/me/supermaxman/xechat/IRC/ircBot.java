@@ -59,7 +59,9 @@ public class ircBot extends PircBot {
 
     @Override
     protected void onNotice(String sourceNick, String sourceLogin, String sourceHostname, String target, String notice) {
-        sendMessageToMain("Notice from : " + sourceNick + " - " + notice);
+        if (target.equalsIgnoreCase(XeChat.conf.getString("IRC.nick"))) {
+            sendMessageToMain("Notice from " + sourceNick + ": " + notice);
+        }
     }
 
     @Override
@@ -76,6 +78,7 @@ public class ircBot extends PircBot {
 
     @Override
     protected void onNickChange(String oldNick, String login, String hostname, String newNick) {
+        sendMessageToMain("*" + oldNick + " is now known as " + newNick);
     }
 
     @Override
@@ -92,22 +95,19 @@ public class ircBot extends PircBot {
 
     @Override
     protected void onTopic(String channel, String topic, String setBy, long date, boolean changed) {
+        if (changed) {
+            sendMessageToMain("* Topic was changed to \"" + topic + "\" by " + setBy);
+        }
     }
 
     @Override
     protected void onMode(String channel, String sourceNick, String sourceLogin, String sourceHostname, String mode) {
+        sendMessageToMain("* Channel mode changed to " + mode + " By " + sourceNick);
     }
 
     @Override
     protected void onUserMode(String targetNick, String sourceNick, String sourceLogin, String sourceHostname, String mode) {
-    }
-
-    @Override
-    protected void onOp(String channel, String sourceNick, String sourceLogin, String sourceHostname, String recipient) {
-    }
-
-    @Override
-    protected void onDeop(String channel, String sourceNick, String sourceLogin, String sourceHostname, String recipient) {
+        sendMessageToMain("* " + targetNick + "'s mode was set to " + mode + " by " + sourceNick);
     }
 
     void sendMessageToMain(String message) {
