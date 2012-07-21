@@ -1,5 +1,8 @@
 package me.supermaxman.xechat;
 
+import me.supermaxman.xechat.executors.globalExecutor;
+import me.supermaxman.xechat.executors.localExecutor;
+import me.supermaxman.xechat.executors.tradeExecutor;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -17,7 +20,6 @@ public class XeChat extends JavaPlugin implements Listener {
     public static XeChat plugin;
     public static FileConfiguration conf;
     public XeChatListener Listener = new XeChatListener(this);
-    public XeChatCommandExecutor CommandExecutor = new XeChatCommandExecutor(this);
     public static Permission permission = null;
     public static HashMap<Player, String> channelIn = new HashMap<Player, String>();
     public static HashMap<Player, List<String>> channelsOn = new HashMap<Player, List<String>>();
@@ -40,8 +42,9 @@ public class XeChat extends JavaPlugin implements Listener {
         setupConfig();
 
 
-        getCommand("l").setExecutor(CommandExecutor);
-        getCommand("g").setExecutor(CommandExecutor);
+        getCommand("l").setExecutor(new localExecutor(this));
+        getCommand("g").setExecutor(new globalExecutor(this));
+        getCommand("t").setExecutor(new tradeExecutor(this));
         //getCommand("c").setExecutor(CommandExecutor);
         //getCommand("d").setExecutor(CommandExecutor);
     }
