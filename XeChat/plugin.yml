@@ -1,7 +1,7 @@
 author: Supermaxman
 main: me.supermaxman.xechat.XeChat
 name: XeChat
-version: '1.0'
+version: '1.0.1'
 commands:
     l:
         description: Switch to local chat.

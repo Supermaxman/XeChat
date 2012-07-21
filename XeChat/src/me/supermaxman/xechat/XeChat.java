@@ -7,7 +7,6 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,8 +41,9 @@ public class XeChat extends JavaPlugin implements Listener {
         }
         getServer().getPluginManager().registerEvents(Listener, this);
         conf = getConfig();
-        PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!");
+//        PluginDescriptionFile pdfFile = this.getDescription();
+//        System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!");
+        log.info("All systems go! Version:" + this.getDescription().getVersion());//^Redundant.
         setupConfig();
 
 
