@@ -33,7 +33,7 @@ public class localExecutor extends baseExecutor {
             String ch = ChatColor.YELLOW + "l";
 
 
-            String message = XeChatFormater.format(player, gn, m, name, world, ch, ChatColor.YELLOW);
+            String message = XeChatFormater.format(player, m, name, world, ch, ChatColor.YELLOW);
 
 
             for (Entity e : player.getNearbyEntities((Integer) XeChat.conf.get("localdistence"), 300, (Integer) XeChat.conf.get("localdistence"))) {

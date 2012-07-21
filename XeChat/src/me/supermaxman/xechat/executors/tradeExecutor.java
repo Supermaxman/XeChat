@@ -34,7 +34,7 @@ public class tradeExecutor extends baseExecutor {
             String ch = ChatColor.BLUE + "t";
 
 
-            String message = XeChatFormater.format(player, gn, m, name, world, ch, ChatColor.BLUE);
+            String message = XeChatFormater.format(player, m, name, world, ch, ChatColor.BLUE);
             if (!XeChat.channelsOn.containsKey(player)) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add("G");

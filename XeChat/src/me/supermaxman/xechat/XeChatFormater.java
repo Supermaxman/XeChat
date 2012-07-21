@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public class XeChatFormater {
 
-    public static String format(Player p, String group, String m, String name, String world, String ch, ChatColor dcolor) {
+    public static String format(Player p, String m, String name, String world, String ch, ChatColor dcolor) {
 
         name = dcolor + XeChat.chat.getPlayerPrefix(p).replaceAll("&", "§") + name + dcolor + ":";
         ch = dcolor + "[" + dcolor + ch + dcolor + "]";
