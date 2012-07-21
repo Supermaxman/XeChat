@@ -18,7 +18,6 @@ public class tradeExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
         if (args.length > 0) {
-            String gn = XeChat.permission.getPrimaryGroup(player);
             String m = "";
             int i = 0;
             for (String s : args) {

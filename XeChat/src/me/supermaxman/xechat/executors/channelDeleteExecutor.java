@@ -1,29 +1,17 @@
 package me.supermaxman.xechat.executors;
 
 import me.supermaxman.xechat.XeChat;
-import me.supermaxman.xechat.XeChatFormater;
 import me.supermaxman.xechat.Objects.XeChannel;
 
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
 
 public class channelDeleteExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
         if (args.length > 0) {
         	String channelName = args[0];
-            String gn = XeChat.permission.getPrimaryGroup(player);
-            
-            String name = player.getName();
-            ChatColor color = ChatColor.WHITE;
-            
-            
-            
-            
+        	
             
             
             

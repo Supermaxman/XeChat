@@ -1,7 +1,6 @@
 package me.supermaxman.xechat.executors;
 
 import me.supermaxman.xechat.XeChat;
-import me.supermaxman.xechat.XeChatFormater;
 import me.supermaxman.xechat.Objects.XeChannel;
 
 import org.bukkit.ChatColor;
@@ -13,12 +12,9 @@ public class channelJoinExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
         if (args.length > 0) {
-        	String channelName = args[0];
-            String gn = XeChat.permission.getPrimaryGroup(player);
+        	String channelName = args[0];            
             
-            String name = player.getName();
-            ChatColor color = ChatColor.WHITE;
-            
+        	
             if (!XeChat.channelsOn.containsKey(player)) {
                 ArrayList<XeChannel> list = new ArrayList<XeChannel>();
                 list.add(XeChat.g);

@@ -7,9 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 abstract class baseExecutor implements CommandExecutor {
-    private static XeChat XE;
+    @SuppressWarnings("unused")
+	private static XeChat XE;
     // Permission permission = xEssentials.permission;
-
+    
     baseExecutor(XeChat XE) {
         baseExecutor.XE = XE;
     }
