@@ -1,0 +1,11 @@
+author: Supermaxman
+main: me.supermaxman.xechat.XeChat
+name: XeChat
+version: '1.0'
+commands:
+    l:
+        description: 
+        usage: /<command>
+    g:
+        description: 
+        usage: /<command>
