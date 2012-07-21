@@ -42,7 +42,12 @@ public class XeChatListener implements Listener {
         if (!XeChat.channelIn.containsKey(p)) {
             XeChat.channelIn.put(p, XeChat.g);
         }
-
+        
+        if(!XeChat.channels.containsKey(XeChat.channelIn.get(p))){
+        	XeChat.channelIn.put(p, XeChat.g);
+        }
+        
+        
         if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
             String m = event.getMessage();
             String name = p.getName();

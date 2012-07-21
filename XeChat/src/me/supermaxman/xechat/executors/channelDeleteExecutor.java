@@ -33,7 +33,7 @@ public class channelDeleteExecutor extends baseExecutor {
         		XeChat.channels.remove(channel);
             	for(Player p : player.getServer().getOnlinePlayers()){
             		if(XeChat.channelIn.containsKey(p)){
-            			System.out.println(1);
+            			
             			if(XeChat.channelsOn.get(p).contains(channel)){
             			XeChat.channelIn.put(p, XeChat.g);
             			XeChat.channelsOn.get(p).remove(channel);
