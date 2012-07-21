@@ -4,35 +4,29 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class XeChatFormater {
-    private static final ChatColor white = ChatColor.WHITE;
-    private static final ChatColor grey = ChatColor.GRAY;
-    private static final ChatColor gold = ChatColor.GOLD;
-    static ChatColor red = ChatColor.DARK_RED;
-    private static final ChatColor dred = ChatColor.DARK_RED;
-    static ChatColor yellow = ChatColor.YELLOW;
-    static ChatColor aqua = ChatColor.AQUA;
-
 
     public static String format(Player p, String group, String m, String name, String world, String ch, ChatColor dcolor) {
 
 
         String worldchat = "";
 
-        if ((Boolean) XeChat.conf.get("worldinchat")) {
-            worldchat = white + "[" + world + "]";
+        if (XeChat.conf.getBoolean("worldinchat")) {
+            worldchat = ChatColor.WHITE + "[" + world + "]";
         }
 
 
-        ChatColor color = grey;
+        ChatColor color = ChatColor.GRAY;
 
 
         if (p.isOp()) {
-            color = dred;
+            color = ChatColor.DARK_RED;
         } else if (group.equalsIgnoreCase("admin")) {
-            color = gold;
+            color = ChatColor.GOLD;
         }
+
         name = dcolor + "[" + color + name + dcolor + "]: ";
         ch = dcolor + "[" + dcolor + ch + dcolor + "]";
+
         return (ch + worldchat + name + m);
     }
 
