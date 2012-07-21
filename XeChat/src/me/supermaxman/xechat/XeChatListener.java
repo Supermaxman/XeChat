@@ -70,6 +70,16 @@ public class XeChatListener implements Listener {
             }
             p.sendMessage(message);
             event.getRecipients().clear();
+        } else if (XeChat.channelIn.get(p).equalsIgnoreCase("trade")) {
+        	String m = event.getMessage();
+            String name = p.getName();
+            String world = p.getWorld().getName();
+
+            //String ch = XeChat.conf.getString("defaultChannel");
+
+            String message = XeChatFormater.format(p, m, name, world, XeChat.g);
+
+            event.setFormat(message);
         }
     }
 
