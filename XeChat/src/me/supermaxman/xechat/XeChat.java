@@ -36,7 +36,7 @@ public class XeChat extends JavaPlugin {
     public static XeChannel g = new XeChannel("G", "server", ChatColor.WHITE);
     public static XeChannel l = new XeChannel("l", "server", ChatColor.YELLOW);
     public static XeChannel trade = new XeChannel("trade", "server", ChatColor.BLUE);
-    public static XeChannel z = new XeChannel("z", "server", ChatColor.GREEN);
+    public static XeChannel z = new XeChannel("z", "server", ChatColor.DARK_GREEN);
     
     @Override
     public void onDisable() {
