@@ -6,7 +6,6 @@ import me.supermaxman.xechat.executors.tradeExecutor;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class XeChat extends JavaPlugin implements Listener {
+public class XeChat extends JavaPlugin {
 
     //Required
     private Logger log;
@@ -39,11 +38,12 @@ public class XeChat extends JavaPlugin implements Listener {
             this.setEnabled(false);
             return;
         }
+
         getServer().getPluginManager().registerEvents(Listener, this);
+
         conf = getConfig();
-//        PluginDescriptionFile pdfFile = this.getDescription();
-//        System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!");
-        log.info("All systems go! Version:" + this.getDescription().getVersion());//^Redundant.
+
+        log.info("All systems go! Version:" + this.getDescription().getVersion());
         setupConfig();
 
 
