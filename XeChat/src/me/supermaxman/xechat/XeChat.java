@@ -6,6 +6,7 @@ import me.supermaxman.xechat.IRC.pircbot.NickAlreadyInUseException;
 import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.executors.globalExecutor;
 import me.supermaxman.xechat.executors.localExecutor;
+import me.supermaxman.xechat.executors.staffExecutor;
 import me.supermaxman.xechat.executors.tradeExecutor;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
@@ -64,7 +65,7 @@ public class XeChat extends JavaPlugin {
         getCommand("l").setExecutor(new localExecutor(this));
         getCommand("g").setExecutor(new globalExecutor(this));
         getCommand("trade").setExecutor(new tradeExecutor(this));
-        //getCommand("z").setExecutor(CommandExecutor);
+        getCommand("z").setExecutor(new staffExecutor(this));
         
         setupIRC();
     }
