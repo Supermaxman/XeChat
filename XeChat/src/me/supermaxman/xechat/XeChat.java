@@ -1,5 +1,8 @@
 package me.supermaxman.xechat;
 
+import me.supermaxman.xechat.IRC.ircBot;
+import me.supermaxman.xechat.IRC.pircbot.IrcException;
+import me.supermaxman.xechat.IRC.pircbot.NickAlreadyInUseException;
 import me.supermaxman.xechat.executors.globalExecutor;
 import me.supermaxman.xechat.executors.localExecutor;
 import me.supermaxman.xechat.executors.tradeExecutor;
@@ -10,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,12 +28,13 @@ public class XeChat extends JavaPlugin {
     public static Chat chat = null;
     public static final HashMap<Player, String> channelIn = new HashMap<Player, String>();
     public static final HashMap<Player, List<String>> channelsOn = new HashMap<Player, List<String>>();
-
-    //herpus
+    static ircBot bot;
 
     @Override
     public void onDisable() {
         log.info("Disabled.");
+        bot.disconnect();
+        bot.dispose();
     }
 
     @Override
@@ -54,6 +59,26 @@ public class XeChat extends JavaPlugin {
         getCommand("t").setExecutor(new tradeExecutor(this));
         //getCommand("c").setExecutor(CommandExecutor);
         //getCommand("d").setExecutor(CommandExecutor);
+        setupIRC();
+    }
+
+
+    void setupIRC() {
+
+        bot = new ircBot(this);
+        try {
+            bot.connect("127.0.0.1");
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (NickAlreadyInUseException e) {
+            e.printStackTrace();
+        } catch (IrcException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        bot.joinChannel(conf.getString("IRC.Channel"));
+        bot.setVerbose(false);
+        bot.setMessageDelay(0);
+        bot.sendMessage(conf.getString("IRC.Channel"), conf.getString("IRC.JoinMessage"));
     }
 
     void setupConfig() {
@@ -65,6 +90,18 @@ public class XeChat extends JavaPlugin {
         }
         if (conf.get("localdistence") == null) {
             conf.set("localdistence", 100);
+        }
+        if (!conf.contains("IRC.nick")) {
+            conf.set("IRC.nick", "DevBot");
+        }
+        if (!conf.contains("IRC.JoinMessage")) {
+            conf.set("IRC.JoinMessage", "IM ALIVE");
+        }
+        if (!conf.contains("IRC.Channel")) {
+            conf.set("IRC.Channel", "#Xe");
+        }
+        if (!conf.contains("IRC.nsPass")) {
+            conf.set("IRC.nsPass", "Your_epic_pass");
         }
         saveConfig();
     }
