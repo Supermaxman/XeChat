@@ -38,10 +38,10 @@ public class tradeExecutor extends baseExecutor {
                 list.add("G");
                 XeChat.channelsOn.put(player, list);
             }
-            XeChat.channelsOn.get(player).add("t");
+            XeChat.channelsOn.get(player).add("trade");
             for (Player r : player.getServer().getOnlinePlayers()) {
                 if (XeChat.channelsOn.containsKey(r)) {
-                    if (XeChat.channelsOn.get(r).contains("t")) {
+                    if (XeChat.channelsOn.get(r).contains("trade")) {
                         r.sendMessage(message);
                     }
                 }
@@ -49,7 +49,7 @@ public class tradeExecutor extends baseExecutor {
 
 
         } else if (args.length == 0) {
-            XeChat.channelIn.put(player, "t");
+            XeChat.channelIn.put(player, "trade");
 
             player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  XeChat.trade.getColor()+XeChat.trade.getName() + ChatColor.AQUA + ".");
         }

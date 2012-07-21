@@ -63,9 +63,9 @@ public class XeChat extends JavaPlugin {
 
         getCommand("l").setExecutor(new localExecutor(this));
         getCommand("g").setExecutor(new globalExecutor(this));
-        getCommand("t").setExecutor(new tradeExecutor(this));
-        //getCommand("c").setExecutor(CommandExecutor);
-        //getCommand("d").setExecutor(CommandExecutor);
+        getCommand("trade").setExecutor(new tradeExecutor(this));
+        //getCommand("z").setExecutor(CommandExecutor);
+        
         setupIRC();
     }
 
