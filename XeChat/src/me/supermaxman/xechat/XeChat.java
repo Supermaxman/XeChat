@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 public class XeChat extends JavaPlugin implements Listener {
 
     //Required
-    private static XeChat plugin;
     private Logger log;
     public static FileConfiguration conf;
     private final XeChatListener Listener = new XeChatListener(this);
@@ -45,7 +44,6 @@ public class XeChat extends JavaPlugin implements Listener {
         conf = getConfig();
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println(pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!");
-        plugin = this;
         setupConfig();
 
 
@@ -74,7 +72,8 @@ public class XeChat extends JavaPlugin implements Listener {
         RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
         if (permissionProvider != null) {
             permission = permissionProvider.getProvider();
+            return true;
         }
-        return (permission != null);
+        return false;
     }
 }

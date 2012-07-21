@@ -11,7 +11,7 @@ abstract class baseExecutor implements CommandExecutor {
     // Permission permission = xEssentials.permission;
 
     baseExecutor(XeChat XE) {
-        this.XE = XE;
+        baseExecutor.XE = XE;
     }
 
     @Override
