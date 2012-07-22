@@ -4,17 +4,9 @@ import me.supermaxman.xechat.IRC.ircBot;
 import me.supermaxman.xechat.IRC.pircbot.IrcException;
 import me.supermaxman.xechat.IRC.pircbot.NickAlreadyInUseException;
 import me.supermaxman.xechat.Objects.XeChannel;
-import me.supermaxman.xechat.executors.channelCreatorExecutor;
-import me.supermaxman.xechat.executors.channelDeleteExecutor;
-import me.supermaxman.xechat.executors.channelJoinExecutor;
-import me.supermaxman.xechat.executors.channelLeaveExecutor;
-import me.supermaxman.xechat.executors.globalExecutor;
-import me.supermaxman.xechat.executors.localExecutor;
-import me.supermaxman.xechat.executors.staffExecutor;
-import me.supermaxman.xechat.executors.tradeExecutor;
+import me.supermaxman.xechat.executors.*;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
-
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -40,7 +32,8 @@ public class XeChat extends JavaPlugin {
     public static XeChannel trade = new XeChannel("trade", "server", ChatColor.BLUE);
     public static XeChannel z = new XeChannel("z", "server", ChatColor.DARK_GREEN);
     public static final HashMap<String, XeChannel> channels = new HashMap<String, XeChannel>();
-    
+    public static XeChat XE;
+
     @Override
     public void onDisable() {
         log.info("Disabled.");
@@ -50,6 +43,7 @@ public class XeChat extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        XE = this;
         log = getLogger();
         conf = getConfig();
         if (!setupPermissions() || !setupChat()) {
@@ -72,22 +66,21 @@ public class XeChat extends JavaPlugin {
         getCommand("join").setExecutor(new channelJoinExecutor(this));
         getCommand("delete").setExecutor(new channelDeleteExecutor(this));
         getCommand("leave").setExecutor(new channelLeaveExecutor(this));
-        
-        setupIRC();
-        
-    }
-    
 
-    public void setupChannels(){
-    	channels.put("g", g);
-    	channels.put("l", l);
-    	channels.put("trade", trade);
-    	channels.put("z", z);
-    	
+        setupIRC();
+
     }
-    
-    
-    
+
+
+    public void setupChannels() {
+        channels.put("g", g);
+        channels.put("l", l);
+        channels.put("trade", trade);
+        channels.put("z", z);
+
+    }
+
+
     void setupIRC() {
 
         bot = new ircBot(this);

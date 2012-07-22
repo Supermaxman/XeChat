@@ -1,7 +1,6 @@
 package me.supermaxman.xechat;
 
 import me.supermaxman.xechat.Objects.XeChannel;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -23,18 +22,18 @@ public class XeChatListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (!XeChat.g.getPlayers().contains(player)) {
-        	XeChat.g.addPlayer(player);
+            XeChat.g.addPlayer(player);
         }
         event.setJoinMessage(player.getName() + " Joined the game!");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getJoinMessage()));
-        
+
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         event.setQuitMessage(event.getPlayer().getName() + " Quit!");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getQuitMessage()));
-        
+
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -43,10 +42,9 @@ public class XeChatListener implements Listener {
         if (!XeChat.channelIn.containsKey(p)) {
             XeChat.channelIn.put(p, XeChat.g);
         }
-        if (!XeChat.g.getPlayers().contains(p)) {
-        	XeChat.g.addPlayer(p);
+        if (!XeChat.g.getPlayers().contains(p.getName())) {
+            XeChat.g.addPlayer(p);
         }
-        
 
 
         if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
@@ -87,7 +85,7 @@ public class XeChatListener implements Listener {
             XeChannel channel = XeChat.channelIn.get(p);
             String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
             channel.sendString(message);
-            
+
             event.getRecipients().clear();
         }
     }
