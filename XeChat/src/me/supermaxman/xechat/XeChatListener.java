@@ -1,5 +1,7 @@
 package me.supermaxman.xechat;
 
+import me.supermaxman.xechat.Objects.XeChannel;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -82,11 +84,9 @@ public class XeChatListener implements Listener {
             String m = event.getMessage();
             String name = p.getName();
             String world = p.getWorld().getName();
-            
+            XeChannel channel = XeChat.channelIn.get(p);
             String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
-            for (Player r : XeChat.channelIn.get(p).getPlayers()) {
-            	r.sendMessage(message);
-            }
+            channel.sendString(message);
             
             event.getRecipients().clear();
         }

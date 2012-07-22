@@ -24,20 +24,13 @@ public class staffExecutor extends baseExecutor {
             String name = player.getName();
             String world = player.getWorld().getName();
             
-            
-            
             String message = XeChatFormater.format(player, m, name, world, XeChat.z);
             XeChat.z.addPlayer(player);
-            for (Player r : player.getServer().getOnlinePlayers()) {
-                if (XeChat.z.getPlayers().contains(r)) {
-                    r.sendMessage(message);
-                }
-            }
-
-
+            XeChat.z.sendString(message);
+            
         } else if (args.length == 0) {
             XeChat.channelIn.put(player, XeChat.z);
-            
+            XeChat.z.addPlayer(player);
             player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  XeChat.z.getColor()+XeChat.z.getName() + ChatColor.AQUA + ".");
         }
     	

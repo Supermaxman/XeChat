@@ -26,16 +26,12 @@ public class tradeExecutor extends baseExecutor {
             
             String message = XeChatFormater.format(player, m, name, world, XeChat.trade);
             XeChat.trade.addPlayer(player);
-            for (Player r : player.getServer().getOnlinePlayers()) {
-                if (XeChat.trade.getPlayers().contains(r)) {
-                    r.sendMessage(message);
-                }
-            }
-
+            XeChat.trade.sendString(message);
+            
 
         } else if (args.length == 0) {
             XeChat.channelIn.put(player, XeChat.trade);
-
+            XeChat.trade.addPlayer(player);
             player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  XeChat.trade.getColor()+XeChat.trade.getName() + ChatColor.AQUA + ".");
         }
     }

@@ -6,8 +6,6 @@ import me.supermaxman.xechat.Objects.XeChannel;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-
 public class channelJoinExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
@@ -15,11 +13,7 @@ public class channelJoinExecutor extends baseExecutor {
         	String channelName = args[0];            
             
         	
-            if (!XeChat.channelsOn.containsKey(player)) {
-                ArrayList<XeChannel> list = new ArrayList<XeChannel>();
-                list.add(XeChat.g);
-                XeChat.channelsOn.put(player, list);
-                }
+            
             if(XeChat.channels.containsKey(channelName)){
             	XeChannel channel = XeChat.channels.get(channelName);
             	channel.addPlayer(player);

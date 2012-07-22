@@ -28,13 +28,12 @@ import java.util.logging.Logger;
 public class XeChat extends JavaPlugin {
 
     //Required
-    private Logger log;
+    public static Logger log;
     public static FileConfiguration conf;
     private final XeChatListener Listener = new XeChatListener(this);
     public static Permission permission = null;
     public static Chat chat = null;
     public static final HashMap<Player, XeChannel> channelIn = new HashMap<Player, XeChannel>();
-    public static final HashMap<Player, List<XeChannel>> channelsOn = new HashMap<Player, List<XeChannel>>();
     static ircBot bot;
     public static XeChannel g = new XeChannel("G", "server", ChatColor.WHITE);
     public static XeChannel l = new XeChannel("l", "server", ChatColor.YELLOW);

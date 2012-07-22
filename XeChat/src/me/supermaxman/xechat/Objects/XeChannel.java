@@ -2,6 +2,8 @@ package me.supermaxman.xechat.Objects;
 
 import java.util.ArrayList;
 
+import me.supermaxman.xechat.XeChat;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -21,7 +23,15 @@ public class XeChannel{
     }
 	
 	
-	
+	public void sendString(String m){
+		if(m!=null){
+			for (Player p: players){
+				p.sendMessage(m);
+			}
+		}else{
+			XeChat.log.warning("Dont send Null to a channel derp.");
+		}
+	}
 	
 	public String getName(){
 		return name;
