@@ -30,7 +30,7 @@ public class XeChannel {
                     p.sendMessage(m);
                 }
             }
-            XeChat.log.info(toString());
+            XeChat.log.info(toDBFormat());
         } else {
             XeChat.log.warning("Dont send Null to a channel derp.");
         }
@@ -60,6 +60,20 @@ public class XeChannel {
 
     public String toDBFormat() {
         StringBuilder builder = new StringBuilder();
+        builder.append(getName());
+        builder.append(":" + getColor());
+        builder.append(":" + getCreatorName());
+        builder.append(":" + "Players{");
+        int i = 0;
+        for (String s : getPlayers()) {
+            if (i != 0) {
+                builder.append("," + s);
+            } else {
+                builder.append(s);
+            }
+            i++;
+        }
+        builder.append("}");
 
 
         return builder.toString();
@@ -76,7 +90,7 @@ public class XeChannel {
     }
 
     public void removePlayer(Player p) {
-        this.players.remove(p);
+        this.players.remove(p.getName());
 
     }
 }
