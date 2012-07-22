@@ -16,7 +16,7 @@ public class channelJoinExecutor extends baseExecutor {
             
             if(XeChat.channels.containsKey(channelName)){
             	XeChannel channel = XeChat.channels.get(channelName);
-            	if(!channel.getPlayers().contains(player)){
+            	if(!channel.getPlayers().contains(player.getName())){
             		
             	channel.addPlayer(player);
                 XeChat.channelIn.put(player, channel);
