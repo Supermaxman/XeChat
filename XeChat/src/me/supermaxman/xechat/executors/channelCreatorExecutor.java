@@ -22,8 +22,8 @@ public class channelCreatorExecutor extends baseExecutor {
             	}
             }
             
-            XeChannel channel = new XeChannel(channelName, name, color);
             if(!XeChat.channels.containsKey(channelName)){
+                XeChannel channel = new XeChannel(channelName, name, color);
                 channel.addPlayer(player);
                 XeChat.channels.put(channelName, channel);
                 XeChat.channelIn.put(player, channel);

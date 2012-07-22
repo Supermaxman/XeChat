@@ -18,7 +18,8 @@ public class channelDeleteExecutor extends baseExecutor {
             if(XeChat.channels.containsKey(channelName)){
             	XeChannel channel = XeChat.channels.get(channelName);
             	if((channel.getCreatorName().equalsIgnoreCase(player.getName()))||(XeChat.permission.has(player, "xechat.delete.any"))){
-        		XeChat.channels.remove(channelName);
+        		if(channel.isPermenent()==false){
+            	XeChat.channels.remove(channelName);
             	for(Player p : player.getServer().getOnlinePlayers()){
             		if(channel.getPlayers().contains(p.getName())){
             		XeChat.channelIn.put(p, XeChat.g);
@@ -26,6 +27,9 @@ public class channelDeleteExecutor extends baseExecutor {
             		}
             	}
             	channel.getPlayers().clear();
+        		}else{
+                    player.sendMessage(ChatColor.RED + "[XeChat]: You Cannot Delete "+channelName+".");
+        		}
             }else{
                 player.sendMessage(ChatColor.RED + "[XeChat]: You Do Not Have Permission to Delete "+channelName+".");
             }

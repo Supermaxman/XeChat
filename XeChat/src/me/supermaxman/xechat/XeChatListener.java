@@ -21,7 +21,7 @@ public class XeChatListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (!XeChat.g.getPlayers().contains(player)) {
+        if (!XeChat.g.getPlayers().contains(player.getName())) {
             XeChat.g.addPlayer(player);
         }
         event.setJoinMessage(player.getName() + " Joined the game!");

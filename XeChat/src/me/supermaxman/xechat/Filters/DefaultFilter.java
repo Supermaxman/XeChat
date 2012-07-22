@@ -14,7 +14,8 @@ public class DefaultFilter {
 
     public static ArrayList<String> getCensored() {
         if (censored == null) {
-            new ArrayList<String>();
+            censored = new ArrayList<String>();
+            censored.add("crap");
             censored.add("4r5e");
             censored.add("5h1t");
             censored.add("5hit");
@@ -101,31 +102,7 @@ public class DefaultFilter {
             censored.add("fannyfucker");
             censored.add("fanyy");
             censored.add("fatass");
-            censored.add("fcuk");
-            censored.add("fcuker");
-            censored.add("fcuking");
-            censored.add("feck");
-            censored.add("fecker");
-            censored.add("fook");
-            censored.add("fooker");
-            censored.add("fuck");
-            censored.add("fuck");
-            censored.add("fucka");
-            censored.add("fucker");
-            censored.add("fuckhead");
-            censored.add("fuckin");
-            censored.add("fucking");
-            censored.add("fuckingshitmotherfucker");
-            censored.add("fuckwhit");
-            censored.add("fuckwit");
-            censored.add("fuk");
-            censored.add("fuker");
-            censored.add("fukker");
-            censored.add("fukkin");
-            censored.add("fukwhit");
-            censored.add("fukwit");
-            censored.add("fux");
-            censored.add("fux0r");
+           
             censored.add("gaylord");
             censored.add("goatse");
             censored.add("heshe");
@@ -158,23 +135,7 @@ public class DefaultFilter {
             censored.add("mo-fo");
             censored.add("mof0");
             censored.add("mofo");
-            censored.add("motherfucker");
-            censored.add("motherfuckka");
-            censored.add("mutha");
-            censored.add("muthafecker");
-            censored.add("muthafuckker");
-            censored.add("muther");
-            censored.add("mutherfucker");
-            censored.add("n1gga");
-            censored.add("n1gger");
-            censored.add("nazi");
-            censored.add("nigg3r");
-            censored.add("nigg4h");
-            censored.add("nigga");
-            censored.add("niggah");
-            censored.add("niggas");
-            censored.add("niggaz");
-            censored.add("nigger");
+           
             censored.add("nob");
             censored.add("nob jokey");
             censored.add("nobhead");
@@ -182,8 +143,7 @@ public class DefaultFilter {
             censored.add("nobjokey");
             censored.add("numbnuts");
             censored.add("nutsack");
-            censored.add("p0rn");
-            censored.add("pawn");
+            
             censored.add("penis");
             censored.add("penisfucker");
             censored.add("phuck");
@@ -212,7 +172,7 @@ public class DefaultFilter {
             censored.add("shaggin");
             censored.add("shagging");
             censored.add("shemale");
-            censored.add("shi+");
+           
             censored.add("shit");
             censored.add("shit");
             censored.add("shitdick");
@@ -228,7 +188,6 @@ public class DefaultFilter {
             censored.add("spac");
             censored.add("t1tt1e5");
             censored.add("t1tties");
-            censored.add("teets");
             censored.add("teez");
             censored.add("testical");
             censored.add("testicle");
@@ -257,8 +216,6 @@ public class DefaultFilter {
             censored.add("wanky");
             censored.add("whoar");
             censored.add("whore");
-            censored.add("willies");
-            censored.add("willy");
         }
         return censored;
     }

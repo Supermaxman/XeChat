@@ -13,6 +13,7 @@ public class XeChannel {
     private String creator;
     private ChatColor color;
     private ArrayList<String> players = new ArrayList<String>();    
+    private boolean isPermenent = false;
     
     public XeChannel(String channelName, String channelCreator, ChatColor channelColor) {
         name = channelName;
@@ -43,7 +44,14 @@ public class XeChannel {
     public String getName() {
         return name;
     }
-
+    public boolean isPermenent() {
+        return isPermenent;
+    }
+    
+    public void setPermenent(boolean b) {
+        this.isPermenent = b;
+    }
+    
     public String getCreatorName() {
         return creator;
     }

@@ -3,6 +3,7 @@ package me.supermaxman.xechat;
 import java.util.ArrayList;
 
 import me.supermaxman.xechat.Filters.DefaultFilter;
+import me.supermaxman.xechat.Filters.KickFilter;
 import me.supermaxman.xechat.Objects.XeChannel;
 
 import org.bukkit.ChatColor;
@@ -15,7 +16,7 @@ public class XeChatFormater {
         name = dcolor + XeChat.chat.getPlayerPrefix(p).replaceAll("&", "§") + name + dcolor + ":";
         
         String ch = dcolor + "[" + dcolor + channel.getName() + dcolor + "]";
-        m = censorChat(m);
+        m = censorChat(m, p);
         if (XeChat.conf.getBoolean("worldinchat")) {
             return (String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m));
 
@@ -25,13 +26,25 @@ public class XeChatFormater {
         }
     }
 
-    public static String censorChat(String m){
+    public static String censorChat(String m, Player p){
+
     	
     	ArrayList<String> censored = DefaultFilter.getCensored();
     	for(String s: censored){
-    		m.replaceAll(s.toLowerCase(), "***");
-    		m.replaceAll(s.toUpperCase(), "***");
-    		System.out.println(1);
+    		if(m.toLowerCase().contains(s.toLowerCase())){
+    			m = m.replaceAll(s, "****");
+    			
+    		}
+    	}
+    	ArrayList<String> kcensored = KickFilter.getCensored();
+    	
+    	for(String s: kcensored){
+    		if(m.toLowerCase().contains(s.toLowerCase())){
+    			m = ChatColor.RED + "Was Kicked For Foul Language";
+    			p.kickPlayer(ChatColor.RED+"Kicked For Foul Language.");
+    			
+    			break;
+    		}
     	}
     	
     	
