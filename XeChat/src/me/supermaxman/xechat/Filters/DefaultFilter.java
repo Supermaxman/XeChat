@@ -15,6 +15,7 @@ public class DefaultFilter {
     public static ArrayList<String> getCensored() {
         if (censored == null) {
             censored = new ArrayList<String>();
+            censored.add("www");
             censored.add("crap");
             censored.add("4r5e");
             censored.add("5h1t");
