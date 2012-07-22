@@ -25,6 +25,7 @@ public class channelCreatorExecutor extends baseExecutor {
             XeChannel channel = new XeChannel(channelName, name, color);
             if(!XeChat.channels.containsKey(channelName)){
                 channel.addPlayer(player);
+                XeChat.channels.put(channelName, channel);
                 XeChat.channelIn.put(player, channel);
                 player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  channel.getColor()+channel.getName() + ChatColor.AQUA + ".");
             }else{
