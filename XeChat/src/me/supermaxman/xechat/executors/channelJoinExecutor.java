@@ -16,9 +16,17 @@ public class channelJoinExecutor extends baseExecutor {
             
             if(XeChat.channels.containsKey(channelName)){
             	XeChannel channel = XeChat.channels.get(channelName);
+            	if(!channel.getPlayers().contains(player)){
+            		
             	channel.addPlayer(player);
                 XeChat.channelIn.put(player, channel);
+                
                 player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  channel.getColor()+channel.getName() + ChatColor.AQUA + ".");
+            	}else{
+                    XeChat.channelIn.put(player, channel);
+                    
+                    player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  channel.getColor()+channel.getName() + ChatColor.AQUA + ".");
+            	}
             }else{
                 player.sendMessage(ChatColor.RED + "[XeChat]: The Channel "+channelName+" Does Not Exist. Type /create "+channelName+" To  Create It.");
             }
