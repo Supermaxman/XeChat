@@ -27,9 +27,9 @@ commands:
     leave:
         description: Leaves channels
         usage: /<command>
-     clist:
+    chlist:
         description: Leaves channels
         usage: /<command>
-      channellist:
+    channellist:
         description: Leaves channels
         usage: /<command>
