@@ -24,6 +24,7 @@ public class XeChat extends JavaPlugin {
     //Required
     public static Logger log;
     public static FileConfiguration conf;
+    
     private final XeChatListener Listener = new XeChatListener(this);
     public static Permission permission = null;
     public static Chat chat = null;
@@ -57,10 +58,8 @@ public class XeChat extends JavaPlugin {
         setupChannels();
         getServer().getPluginManager().registerEvents(Listener, this);
         setupConfig();
-
         log.info("All systems go! Version:" + this.getDescription().getVersion());
-
-
+        
         getCommand("l").setExecutor(new localExecutor(this));
         getCommand("g").setExecutor(new globalExecutor(this));
         getCommand("trade").setExecutor(new tradeExecutor(this));

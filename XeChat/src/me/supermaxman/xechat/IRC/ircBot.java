@@ -108,6 +108,6 @@ public class ircBot extends PircBot {
     }
 
     void sendMessageToMain(String message) {
-    	XeChat.g.sendString("[IRC] " + color + message);
+    	XeChat.g.sendString("[IRC]:" + color + message);
     }
 }
