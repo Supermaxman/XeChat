@@ -2,6 +2,7 @@ package me.supermaxman.xechat;
 
 import java.util.ArrayList;
 
+import me.supermaxman.xechat.Filters.ColorFilter;
 import me.supermaxman.xechat.Filters.DefaultFilter;
 import me.supermaxman.xechat.Filters.KickFilter;
 import me.supermaxman.xechat.Objects.XeChannel;
@@ -19,7 +20,7 @@ public class XeChatFormater {
         String ch = dcolor + "[" + dcolor + channel.getName() + dcolor + "]";
         m = censorChat(m, p);
         m = PlayerFilter.addColorNames(m, p.getServer(), channel);
-        
+        m = ColorFilter.addColorChat(m, channel);
         if (XeChat.conf.getBoolean("worldinchat")) {
             return (String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m));
 
@@ -35,7 +36,7 @@ public class XeChatFormater {
     	ArrayList<String> censored = DefaultFilter.getCensored();
     	for(String s: censored){
     		if(m.toLowerCase().contains(s.toLowerCase())){
-    			m = m.replaceAll(s, "****");
+    			m = m.toLowerCase().replaceAll(s.toLowerCase(), "****");
     			
     		}
     	}
