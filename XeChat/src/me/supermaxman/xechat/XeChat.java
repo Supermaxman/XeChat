@@ -7,6 +7,7 @@ import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.executors.channelCreatorExecutor;
 import me.supermaxman.xechat.executors.channelDeleteExecutor;
 import me.supermaxman.xechat.executors.channelJoinExecutor;
+import me.supermaxman.xechat.executors.channelLeaveExecutor;
 import me.supermaxman.xechat.executors.globalExecutor;
 import me.supermaxman.xechat.executors.localExecutor;
 import me.supermaxman.xechat.executors.staffExecutor;
@@ -22,7 +23,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class XeChat extends JavaPlugin {
@@ -71,7 +71,7 @@ public class XeChat extends JavaPlugin {
         getCommand("create").setExecutor(new channelCreatorExecutor(this));
         getCommand("join").setExecutor(new channelJoinExecutor(this));
         getCommand("delete").setExecutor(new channelDeleteExecutor(this));
-        //getCommand("leave").setExecutor(new channelLeaveExecutor(this));
+        getCommand("leave").setExecutor(new channelLeaveExecutor(this));
         
         setupIRC();
         

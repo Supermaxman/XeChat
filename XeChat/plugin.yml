@@ -24,3 +24,7 @@ commands:
     delete:
         description: Deletes channels
         usage: /<command>
+    leave:
+        description: Leaves channels
+        usage: /<command>
+ 
