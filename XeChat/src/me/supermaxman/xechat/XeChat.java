@@ -8,6 +8,7 @@ import me.supermaxman.xechat.executors.*;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -15,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public class XeChat extends JavaPlugin {
@@ -39,6 +41,7 @@ public class XeChat extends JavaPlugin {
         log.info("Disabled.");
         bot.disconnect();
         bot.dispose();
+        saveLoadedChannels();
     }
 
     @Override
@@ -69,15 +72,44 @@ public class XeChat extends JavaPlugin {
 
         setupIRC();
 
+
     }
 
 
     public void setupChannels() {
-        channels.put("g", g);
-        channels.put("l", l);
-        channels.put("trade", trade);
-        channels.put("z", z);
 
+        if (conf.isConfigurationSection("channel")) {
+            for (Map.Entry<String, Object> entry : conf.getConfigurationSection("channel").getValues(false).entrySet()) {
+//                log.info(entry.getKey());
+                XeChannel xeChannel = new XeChannel(entry.getKey());
+                ConfigurationSection cs = conf.getConfigurationSection("channel." + entry.getKey());
+                xeChannel.setColor(ChatColor.getByChar(cs.getString("color")));
+                xeChannel.setCreator(cs.getString("creator"));
+                for (String players : cs.getStringList("players")) {
+                    xeChannel.addPlayer(players);
+                }
+
+                channels.put(entry.getKey(), xeChannel);
+
+//                XeChannel derp = new XeChannel(entry.getKey());
+
+            }
+
+
+        } else {
+            channels.put("g", g);
+            channels.put("l", l);
+            channels.put("trade", trade);
+            channels.put("z", z);
+            saveLoadedChannels();
+        }
+    }
+
+    public void saveLoadedChannels() {
+        for (XeChannel xeChannel : channels.values()) {
+            xeChannel.save();
+        }
+        saveConfig();
     }
 
 

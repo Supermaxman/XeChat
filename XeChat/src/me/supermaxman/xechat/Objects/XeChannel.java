@@ -2,6 +2,7 @@ package me.supermaxman.xechat.Objects;
 
 import me.supermaxman.xechat.XeChat;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -21,6 +22,10 @@ public class XeChannel {
         color = channelColor;
     }
 
+    public XeChannel(String name) {
+        this.name = name;
+    }
+
 
     public void sendString(String m) {
         if (m != null) {
@@ -30,6 +35,7 @@ public class XeChannel {
                     p.sendMessage(m);
                 }
             }
+            save();
 //            XeChat.log.info(toDBFormat());
         } else {
             XeChat.log.warning("Dont send Null to a channel derp.");
@@ -44,8 +50,16 @@ public class XeChannel {
         return creator;
     }
 
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
     public ChatColor getColor() {
         return color;
+    }
+
+    public void setColor(ChatColor color) {
+        this.color = color;
     }
 
     public ArrayList<String> getPlayers() {
@@ -57,6 +71,13 @@ public class XeChannel {
         this.players.add(p.getName());
 
     }
+
+    public void addPlayer(String string) {
+        this.players.add(string);
+
+    }
+
+
 //
 //    public String toDBFormat() {
 //        StringBuilder builder = new StringBuilder();
@@ -72,12 +93,20 @@ public class XeChannel {
 //                builder.append(s);
 //            }
 //            i++;
-//        }
+//        }                      w
 //        builder.append("}");
 //
 //
 //        return builder.toString();
 //    }
+
+    public void save() {
+        FileConfiguration config = XeChat.conf;
+        config.set("channel." + name + ".creator", creator);
+        config.set("channel." + name + ".color", color.getChar());
+        config.set("channel." + name + ".players", players);
+        XeChat.XE.saveConfig();
+    }
 
     @Override
     public String toString() {
