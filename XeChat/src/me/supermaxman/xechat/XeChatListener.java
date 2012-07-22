@@ -45,8 +45,8 @@ public class XeChatListener implements Listener {
         if (!XeChat.g.getPlayers().contains(p.getName())) {
             XeChat.g.addPlayer(p);
         }
-
-
+        
+        
         if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
             String m = event.getMessage();
             String name = p.getName();
@@ -55,7 +55,7 @@ public class XeChatListener implements Listener {
             //String ch = XeChat.conf.getString("defaultChannel");
 
             String message = XeChatFormater.format(p, m, name, world, XeChat.g);
-
+            
             event.setFormat(message);
 
             if (!m.equalsIgnoreCase("u00a74u00a75u00a73u00a74v|1")) {
