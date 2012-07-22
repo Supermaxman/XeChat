@@ -20,7 +20,7 @@ public class channelDeleteExecutor extends baseExecutor {
             	if((channel.getCreatorName().equalsIgnoreCase(player.getName()))||(XeChat.permission.has(player, "xechat.delete.any"))){
         		XeChat.channels.remove(channelName);
             	for(Player p : player.getServer().getOnlinePlayers()){
-            		if(channel.getPlayers().contains(p)){
+            		if(channel.getPlayers().contains(p.getName())){
             		XeChat.channelIn.put(p, XeChat.g);
             		p.sendMessage(ChatColor.AQUA + "[XeChat]: "+channelName+" Has Been Deleted, You Were Moved To "+XeChat.g.getColor()+XeChat.g.getName()+ChatColor.AQUA+".");
             		}

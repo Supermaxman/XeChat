@@ -16,7 +16,7 @@ public class channelLeaveExecutor extends baseExecutor {
             
             if(XeChat.channels.containsKey(channelName)){
             	XeChannel channel = XeChat.channels.get(channelName);
-            	if(channel.getPlayers().contains(player)){
+            	if(channel.getPlayers().contains(player.getName())){
             	channel.removePlayer(player);
                 XeChat.channelIn.put(player, XeChat.g);
                 player.sendMessage(ChatColor.AQUA + "[XeChat]: You Have Left " +  channel.getColor()+channel.getName() + ChatColor.AQUA + ".");
