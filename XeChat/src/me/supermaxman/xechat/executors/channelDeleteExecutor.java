@@ -20,16 +20,12 @@ public class channelDeleteExecutor extends baseExecutor {
             	if((channel.getCreatorName().equalsIgnoreCase(player.getName()))||(XeChat.permission.has(player, "xechat.delete.any"))){
         		XeChat.channels.remove(channel);
             	for(Player p : player.getServer().getOnlinePlayers()){
-            		if(XeChat.channelIn.containsKey(p)){
-            			
-            			if(XeChat.channelsOn.get(p).contains(channel)){
-            			XeChat.channelIn.put(p, XeChat.g);
-            			XeChat.channelsOn.get(p).remove(channel);
-                        (p).sendMessage(ChatColor.AQUA + "[XeChat]: "+channelName+" Has Been Deleted, You Were Moved To "+XeChat.g.getColor()+XeChat.g.getName()+ChatColor.AQUA+".");
-            			}
-            			
+            		if(channel.getPlayers().contains(p)){
+            		XeChat.channelIn.put(p, XeChat.g);
+            		p.sendMessage(ChatColor.AQUA + "[XeChat]: "+channelName+" Has Been Deleted, You Were Moved To "+XeChat.g.getColor()+XeChat.g.getName()+ChatColor.AQUA+".");
             		}
             	}
+            	channel.getPlayers().clear();
             }else{
                 player.sendMessage(ChatColor.RED + "[XeChat]: You Do Not Have Permission to Delete "+channelName+".");
             }

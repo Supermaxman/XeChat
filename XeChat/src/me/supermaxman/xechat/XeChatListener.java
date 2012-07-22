@@ -1,6 +1,5 @@
 package me.supermaxman.xechat;
 
-import me.supermaxman.xechat.Objects.XeChannel;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -10,8 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
-import java.util.ArrayList;
 
 public class XeChatListener implements Listener {
     final XeChat plugin;
@@ -23,10 +20,8 @@ public class XeChatListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (!XeChat.channelsOn.containsKey(player)) {
-            ArrayList<XeChannel> list = new ArrayList<XeChannel>();
-            list.add(XeChat.g);
-            XeChat.channelsOn.put(player, list);
+        if (!XeChat.g.getPlayers().contains(player)) {
+        	XeChat.g.addPlayer(player);
         }
         event.setJoinMessage(player.getName() + " Joined the game!");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getJoinMessage()));
@@ -46,10 +41,10 @@ public class XeChatListener implements Listener {
         if (!XeChat.channelIn.containsKey(p)) {
             XeChat.channelIn.put(p, XeChat.g);
         }
-
-        //if(!XeChat.channels.containsKey(XeChat.channelIn.get(p))){
-        //XeChat.channelIn.put(p, XeChat.g);
-        //}
+        if (!XeChat.g.getPlayers().contains(p)) {
+        	XeChat.g.addPlayer(p);
+        }
+        
 
 
         if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
@@ -83,58 +78,16 @@ public class XeChatListener implements Listener {
             }
             p.sendMessage(message);
             event.getRecipients().clear();
-        } else if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("trade")) {
-            String m = event.getMessage();
-            String name = p.getName();
-            String world = p.getWorld().getName();
-
-            //String ch = XeChat.conf.getString("defaultChannel");
-
-            String message = XeChatFormater.format(p, m, name, world, XeChat.trade);
-            for (Player r : p.getServer().getOnlinePlayers()) {
-                if (XeChat.channelsOn.containsKey(r)) {
-                    if (XeChat.channelsOn.get(r).contains(XeChat.trade.getName())) {
-                        r.sendMessage(message);
-                    }
-                }
-            }
-
-            p.sendMessage(message);
-            event.getRecipients().clear();
-        } else if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("z")) {
-            String m = event.getMessage();
-            String name = p.getName();
-            String world = p.getWorld().getName();
-
-            //String ch = XeChat.conf.getString("defaultChannel");
-
-            String message = XeChatFormater.format(p, m, name, world, XeChat.z);
-            for (Player r : p.getServer().getOnlinePlayers()) {
-                if (XeChat.channelsOn.containsKey(r)) {
-                    if (XeChat.channelsOn.get(r).contains(XeChat.z.getName())) {
-                        r.sendMessage(message);
-                    }
-                }
-            }
-
-            p.sendMessage(message);
-            event.getRecipients().clear();
         } else {
             String m = event.getMessage();
             String name = p.getName();
             String world = p.getWorld().getName();
-
-            //String ch = XeChat.conf.getString("defaultChannel");
-
+            
             String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
-            for (Player r : p.getServer().getOnlinePlayers()) {
-                if (XeChat.channelsOn.containsKey(r)) {
-                    if (XeChat.channelsOn.get(r).contains(XeChat.channelIn.get(p))) {
-                        r.sendMessage(message);
-                    }
-                }
+            for (Player r : XeChat.channelIn.get(p).getPlayers()) {
+            	r.sendMessage(message);
             }
-
+            
             event.getRecipients().clear();
         }
     }

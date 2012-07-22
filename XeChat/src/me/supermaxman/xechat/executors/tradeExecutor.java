@@ -2,18 +2,9 @@ package me.supermaxman.xechat.executors;
 
 import me.supermaxman.xechat.XeChat;
 import me.supermaxman.xechat.XeChatFormater;
-import me.supermaxman.xechat.Objects.XeChannel;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-
-/**
- * User: Benjamin
- * Date: 21/07/12
- * Time: 05:24
- */
 public class tradeExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
@@ -34,17 +25,10 @@ public class tradeExecutor extends baseExecutor {
             
             
             String message = XeChatFormater.format(player, m, name, world, XeChat.trade);
-            if (!XeChat.channelsOn.containsKey(player)) {
-                ArrayList<XeChannel> list = new ArrayList<XeChannel>();
-                list.add(XeChat.g);
-                XeChat.channelsOn.put(player, list);
-            }
-            XeChat.channelsOn.get(player).add(XeChat.trade);
+            XeChat.trade.addPlayer(player);
             for (Player r : player.getServer().getOnlinePlayers()) {
-                if (XeChat.channelsOn.containsKey(r)) {
-                    if (XeChat.channelsOn.get(r).contains(XeChat.trade)) {
-                        r.sendMessage(message);
-                    }
+                if (XeChat.trade.getPlayers().contains(r)) {
+                    r.sendMessage(message);
                 }
             }
 

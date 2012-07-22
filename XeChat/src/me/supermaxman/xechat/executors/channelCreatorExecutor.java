@@ -1,7 +1,5 @@
 package me.supermaxman.xechat.executors;
 
-import java.util.ArrayList;
-
 import me.supermaxman.xechat.XeChat;
 import me.supermaxman.xechat.Objects.XeChannel;
 
@@ -25,14 +23,8 @@ public class channelCreatorExecutor extends baseExecutor {
             }
             
             XeChannel channel = new XeChannel(channelName, name, color);
-            if (!XeChat.channelsOn.containsKey(player)) {
-                ArrayList<XeChannel> list = new ArrayList<XeChannel>();
-                list.add(XeChat.g);
-                XeChat.channelsOn.put(player, list);
-                }
             if(!XeChat.channels.containsKey(channelName)){
-                XeChat.channelsOn.get(player).add(channel);
-                XeChat.channels.put(channelName, channel);
+                channel.addPlayer(player);
                 XeChat.channelIn.put(player, channel);
                 player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  channel.getColor()+channel.getName() + ChatColor.AQUA + ".");
             }else{

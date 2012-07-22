@@ -72,7 +72,8 @@ public class XeChat extends JavaPlugin {
         getCommand("create").setExecutor(new channelCreatorExecutor(this));
         getCommand("join").setExecutor(new channelJoinExecutor(this));
         getCommand("delete").setExecutor(new channelDeleteExecutor(this));
-
+        //getCommand("leave").setExecutor(new channelLeaveExecutor(this));
+        
         setupIRC();
         
     }

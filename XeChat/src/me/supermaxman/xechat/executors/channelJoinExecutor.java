@@ -22,7 +22,7 @@ public class channelJoinExecutor extends baseExecutor {
                 }
             if(XeChat.channels.containsKey(channelName)){
             	XeChannel channel = XeChat.channels.get(channelName);
-                XeChat.channelsOn.get(player).add(channel);
+            	channel.addPlayer(player);
                 XeChat.channelIn.put(player, channel);
                 player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " +  channel.getColor()+channel.getName() + ChatColor.AQUA + ".");
             }else{
