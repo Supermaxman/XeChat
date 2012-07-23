@@ -238,7 +238,7 @@ public abstract class PircBot implements ReplyConstants {
      * @throws NickAlreadyInUseException if our nick is already in use on the server.
      * @since PircBot 0.9.9
      */
-    public final synchronized void reconnect() throws IOException, IrcException, NickAlreadyInUseException {
+    public final synchronized void reconnect() throws IOException, IrcException {
         if (getServer() == null) {
             throw new IrcException("Cannot reconnect to an IRC server because we were never connected to one previously!");
         }
@@ -271,40 +271,6 @@ public abstract class PircBot implements ReplyConstants {
      */
     public void setAutoNickChange(boolean autoNickChange) {
         _autoNickChange = autoNickChange;
-    }
-
-
-    /**
-     * Starts an ident server (Identification Protocol Server, RFC 1413).
-     * <p/>
-     * Most IRC servers attempt to contact the ident server on connecting
-     * hosts in order to determine the user's identity.  A few IRC servers
-     * will not allow you to connect unless this information is provided.
-     * <p/>
-     * So when a PircBot is run on a machine that does not run an ident server,
-     * it may be necessary to call this method to start one up.
-     * <p/>
-     * Calling this method starts up an ident server which will respond with
-     * the login provided by calling getLogin() and then shut down immediately.
-     * It will also be shut down if it has not been contacted within 60 seconds
-     * of creation.
-     * <p/>
-     * If you require an ident response, then the correct procedure is to start
-     * the ident server and then connect to the IRC server.  The IRC server may
-     * then contact the ident server to get the information it needs.
-     * <p/>
-     * The ident server will fail to start if there is already an ident server
-     * running on port 113, or if you are running as an unprivileged user who
-     * is unable to create a server socket on that port number.
-     * <p/>
-     * If it is essential for you to use an ident server when connecting to an
-     * IRC server, then make sure that port 113 on your machine is visible to
-     * the IRC server so that it may contact the ident server.
-     *
-     * @since PircBot 0.9c
-     */
-    public final void startIdentServer() {
-        new IdentServer(this, getLogin());
     }
 
 
