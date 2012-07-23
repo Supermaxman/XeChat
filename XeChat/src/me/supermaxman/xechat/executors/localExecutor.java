@@ -28,9 +28,7 @@ public class localExecutor extends baseExecutor {
             String name = player.getName();
             String world = player.getWorld().getName();
 
-            
-            
-            
+
             String message = XeChatFormater.format(player, m, name, world, XeChat.l);
 
 
@@ -46,6 +44,7 @@ public class localExecutor extends baseExecutor {
 
         } else if (args.length == 0) {
             XeChat.channelIn.put(player, XeChat.l);
+            XeChat.isWhispering.put(player, false);
             player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + XeChat.l.getColor() + XeChat.l.getName() + ChatColor.AQUA + ".");
         }
     }

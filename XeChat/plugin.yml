@@ -27,4 +27,29 @@ commands:
     leave:
         description: Leaves channels
         usage: /<command>
- 
+    chlist:
+        description: Leaves channels
+        usage: /<command>
+    channellist:
+        description: Leaves channels
+        usage: /<command>
+    tell:
+        description: Private whisper
+        usage: /<command>
+    w:
+        description: Private whisper
+        usage: /<command>
+    whisper:
+        description: Private whisper
+        usage: /<command>
+    r:
+        description: Private reply
+        usage: /<command>
+    reply:
+        description: Private reply
+        usage: /<command>
+        
+        
+        
+        
+        

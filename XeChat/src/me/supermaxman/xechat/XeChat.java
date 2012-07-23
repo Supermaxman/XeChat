@@ -24,7 +24,7 @@ public class XeChat extends JavaPlugin {
     //Required
     public static Logger log;
     public static FileConfiguration conf;
-    
+
     private final XeChatListener Listener = new XeChatListener(this);
     public static Permission permission = null;
     public static Chat chat = null;
@@ -35,6 +35,10 @@ public class XeChat extends JavaPlugin {
     public static XeChannel trade = new XeChannel("trade", "server", ChatColor.BLUE);
     public static XeChannel z = new XeChannel("z", "server", ChatColor.DARK_GREEN);
     public static final HashMap<String, XeChannel> channels = new HashMap<String, XeChannel>();
+    public static final HashMap<Player, Player> whisper = new HashMap<Player, Player>();
+    public static final HashMap<Player, Boolean> isWhispering = new HashMap<Player, Boolean>();
+    public static final HashMap<Player, String> lastchat = new HashMap<Player, String>();
+
     public static XeChat XE;
 
     @Override
@@ -59,7 +63,7 @@ public class XeChat extends JavaPlugin {
         getServer().getPluginManager().registerEvents(Listener, this);
         setupConfig();
         log.info("All systems go! Version:" + this.getDescription().getVersion());
-        
+
         getCommand("l").setExecutor(new localExecutor(this));
         getCommand("g").setExecutor(new globalExecutor(this));
         getCommand("trade").setExecutor(new tradeExecutor(this));
@@ -68,6 +72,13 @@ public class XeChat extends JavaPlugin {
         getCommand("join").setExecutor(new channelJoinExecutor(this));
         getCommand("delete").setExecutor(new channelDeleteExecutor(this));
         getCommand("leave").setExecutor(new channelLeaveExecutor(this));
+        getCommand("channellist").setExecutor(new channelListExecutor(this));
+        getCommand("chlist").setExecutor(new channelListExecutor(this));
+        getCommand("tell").setExecutor(new tellExecutor(this));
+        getCommand("w").setExecutor(new tellExecutor(this));
+        getCommand("whisper").setExecutor(new tellExecutor(this));
+        getCommand("r").setExecutor(new replyExecutor(this));
+        getCommand("reply").setExecutor(new replyExecutor(this));
 
         setupIRC();
 
@@ -76,6 +87,10 @@ public class XeChat extends JavaPlugin {
 
 
     public void setupChannels() {
+        g.setPermenent(true);
+        l.setPermenent(true);
+        trade.setPermenent(true);
+        z.setPermenent(true);
 
         if (conf.isConfigurationSection("channel")) {
             for (Map.Entry<String, Object> entry : conf.getConfigurationSection("channel").getValues(false).entrySet()) {
@@ -96,7 +111,7 @@ public class XeChat extends JavaPlugin {
 
 
         } else {
-            channels.put("g", g);
+            channels.put("G", g);
             channels.put("l", l);
             channels.put("trade", trade);
             channels.put("z", z);

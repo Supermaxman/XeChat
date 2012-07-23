@@ -10,7 +10,7 @@ import org.bukkit.plugin.Plugin;
 import java.io.IOException;
 
 public class ircBot extends PircBot {
-    ChatColor color = ChatColor.GRAY;
+    ChatColor color = ChatColor.AQUA;
     Plugin herp = null;
 
     public ircBot(Plugin derp) {
@@ -108,6 +108,6 @@ public class ircBot extends PircBot {
     }
 
     void sendMessageToMain(String message) {
-    	XeChat.g.sendString("[IRC]" + color + message);
+        XeChat.g.sendString("[IRC]" + color + message);
     }
 }

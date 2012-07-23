@@ -18,10 +18,11 @@ public class XeChatListener implements Listener {
         this.plugin = plugin;
     }
 
+
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (!XeChat.g.getPlayers().contains(player)) {
+        if (!XeChat.g.getPlayers().contains(player.getName())) {
             XeChat.g.addPlayer(player);
         }
         event.setJoinMessage(player.getName() + " Joined the game!");
@@ -45,48 +46,63 @@ public class XeChatListener implements Listener {
         if (!XeChat.g.getPlayers().contains(p.getName())) {
             XeChat.g.addPlayer(p);
         }
-        
-        
-        if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
+        if (!XeChat.isWhispering.containsKey(p)) {
+            XeChat.isWhispering.put(p, false);
+        }
+
+        if (XeChat.isWhispering.get(p)) {
             String m = event.getMessage();
             String name = p.getName();
-            String world = p.getWorld().getName();
+            Player r = XeChat.whisper.get(p);
+            String message = XeChatFormater.formatWhisper(p, m, name, r);
 
-            //String ch = XeChat.conf.getString("defaultChannel");
-
-            String message = XeChatFormater.format(p, m, name, world, XeChat.g);
-            
-            event.setFormat(message);
-
-            if (!m.equalsIgnoreCase("u00a74u00a75u00a73u00a74v|1")) {
-                XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(name + ": " + m));
-            }
-        } else if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("l")) {
-            String m = event.getMessage();
-            String name = p.getName();
-            String world = p.getWorld().getName();
-
-            String message = XeChatFormater.format(p, m, name, world, XeChat.l);
-
-            for (Entity e : p.getNearbyEntities(XeChat.conf.getInt("localdistence"), 300, XeChat.conf.getInt("localdistence"))) {
-                if (e instanceof Player) {
-                    Player r = (Player) e;
-
-                    r.sendMessage(message);
-
-                }
-            }
+            r.sendMessage(message);
+            message = XeChatFormater.formatWhisperTo(p, m, name, r);
             p.sendMessage(message);
             event.getRecipients().clear();
         } else {
-            String m = event.getMessage();
-            String name = p.getName();
-            String world = p.getWorld().getName();
-            XeChannel channel = XeChat.channelIn.get(p);
-            String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
-            channel.sendString(message);
+            if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
+                String m = event.getMessage();
+                String name = p.getName();
+                String world = p.getWorld().getName();
 
-            event.getRecipients().clear();
+                //String ch = XeChat.conf.getString("defaultChannel");
+
+                String message = XeChatFormater.format(p, m, name, world, XeChat.g);
+
+                event.setFormat(message);
+
+                if (!m.equalsIgnoreCase("u00a74u00a75u00a73u00a74v|1")) {
+                    XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(name + ": " + m));
+                }
+            } else if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("l")) {
+                String m = event.getMessage();
+                String name = p.getName();
+                String world = p.getWorld().getName();
+
+                String message = XeChatFormater.format(p, m, name, world, XeChat.l);
+
+                for (Entity e : p.getNearbyEntities(XeChat.conf.getInt("localdistence"), 300, XeChat.conf.getInt("localdistence"))) {
+                    if (e instanceof Player) {
+                        Player r = (Player) e;
+
+                        r.sendMessage(message);
+
+                    }
+                }
+                p.sendMessage(message);
+                event.getRecipients().clear();
+            } else {
+
+                String m = event.getMessage();
+                String name = p.getName();
+                String world = p.getWorld().getName();
+                XeChannel channel = XeChat.channelIn.get(p);
+                String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
+                channel.sendString(message);
+
+                event.getRecipients().clear();
+            }
         }
     }
 
