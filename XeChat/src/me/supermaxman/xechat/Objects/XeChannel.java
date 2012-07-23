@@ -36,7 +36,6 @@ public class XeChannel {
                 }
             }
             save();
-//            XeChat.log.info(toDBFormat());
         } else {
             XeChat.log.warning("Dont send Null to a channel derp.");
         }
