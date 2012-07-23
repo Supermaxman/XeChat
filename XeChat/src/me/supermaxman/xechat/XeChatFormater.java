@@ -17,6 +17,7 @@ public class XeChatFormater {
         m = censorChat(m, p);
         m = PlayerFilter.addColorNames(m, p.getServer(), dcolor);
         m = ColorFilter.addColorChat(m);
+        //Completely unnecessary. Handled by ncp.
         if (SpamFilter.checkSpam(m, p, channel)) {
             if (XeChat.conf.getBoolean("worldinchat")) {
                 return (String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m));
@@ -63,6 +64,7 @@ public class XeChatFormater {
 
             }
         }
+        //Why not kick on all foul language?
         ArrayList<String> kcensored = KickFilter.getCensored();
 
         for (String s : kcensored) {
