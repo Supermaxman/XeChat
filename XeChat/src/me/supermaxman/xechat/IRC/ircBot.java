@@ -12,10 +12,11 @@ import java.io.IOException;
 public class ircBot extends PircBot {
     ChatColor color = ChatColor.AQUA;
     Plugin herp = null;
+    String nick = XeChat.conf.getString("IRC.nick");
 
     public ircBot(Plugin derp) {
-        setName(XeChat.conf.getString("IRC.nick"));
-        setLogin(XeChat.conf.getString("IRC.nick"));
+        setName(nick);
+        setLogin(nick);
         herp = derp;
     }
 
@@ -56,7 +57,7 @@ public class ircBot extends PircBot {
 
     @Override
     protected void onNotice(String sourceNick, String sourceLogin, String sourceHostname, String target, String notice) {
-        if (target.equalsIgnoreCase(XeChat.conf.getString("IRC.nick"))) {
+        if (target.equalsIgnoreCase(nick)) {
             sendMessageToMain("Notice from " + sourceNick + ": " + notice);
         }
     }
