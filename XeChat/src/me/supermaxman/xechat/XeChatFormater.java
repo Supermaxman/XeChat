@@ -33,7 +33,7 @@ public class XeChatFormater {
 
     public static String formatWhisper(Player p, String m, String name, Player r) {
         ChatColor dcolor = ChatColor.LIGHT_PURPLE;
-        name = dcolor + XeChat.chat.getPlayerPrefix(p).replaceAll("&", "�") + name + dcolor + ":";
+        name = dcolor + ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(p)) + name + dcolor + ":";
 
         String ch = dcolor + "[" + dcolor + "From" + "]";
         m = censorChat(m, p);
@@ -44,7 +44,7 @@ public class XeChatFormater {
 
     public static String formatWhisperTo(Player p, String m, String name, Player r) {
         ChatColor dcolor = ChatColor.LIGHT_PURPLE;
-        name = dcolor + XeChat.chat.getPlayerPrefix(r).replaceAll("&", "�") + r.getName() + dcolor + ":";
+        name = dcolor + ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(p)) + r.getName() + dcolor + ":";
 
         String ch = dcolor + "[" + dcolor + "To" + "]";
         m = censorChat(m, p);

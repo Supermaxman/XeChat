@@ -15,7 +15,7 @@ public class PlayerFilter {
         int i = 0;
         while (i < names.length) {
             if (m.contains(names[i].getName())) {
-                m = m.replaceAll(names[i].getName(), XeChat.chat.getPlayerPrefix(names[i]).replaceAll("&", "�") + names[i].getName() + c);
+                m = m.replaceAll(names[i].getName(), ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(names[i])) + names[i].getName() + c);
             }
             i++;
         }
