@@ -211,7 +211,7 @@ public abstract class PircBot implements ReplyConstants {
 
         // This makes the socket timeout on read operations after 5 minutes.
         // Maybe in some future version I will let the user change this at runtime.
-        socket.setSoTimeout(5 * 60 * 1000);
+        socket.setSoTimeout(300000);
 
         // Now start the InputThread to read all other lines from the server.
         _inputThread.start();
