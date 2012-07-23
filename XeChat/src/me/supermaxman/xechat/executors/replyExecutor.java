@@ -11,7 +11,7 @@ public class replyExecutor extends baseExecutor {
     protected void run(Player player, String[] args) {
         if (args.length > 0) {
         	if(XeChat.whisper.containsKey(player)){
-        		Player r = player.getServer().getPlayerExact(args[0]);
+        		Player r = XeChat.whisper.get(player);
             String m = "";
             int i = 0;
             for (String s : args) {
