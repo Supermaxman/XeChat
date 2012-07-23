@@ -50,11 +50,9 @@ public class OutputThread extends Thread {
      * A static method to write a line to a BufferedOutputStream and then pass
      * the line to the log method of the supplied PircBot instance.
      *
-     * @param bot      The underlying PircBot instance.
-     * @param out      The BufferedOutputStream to write to.
-     * @param line     The line to be written. "\r\n" is appended to the end.
-     * @param encoding The charset to use when encoing this string into a
-     *                 byte array.
+     * @param bot     The underlying PircBot instance.
+     * @param bwriter The buffered writer
+     * @param line    The line to be written. "\r\n" is appended to the end.
      */
     static void sendRawLine(PircBot bot, BufferedWriter bwriter, String line) {
         if (line.length() > bot.getMaxLineLength() - 2) {
