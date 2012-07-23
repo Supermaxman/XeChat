@@ -75,18 +75,33 @@ public class XeChannel {
 
     }
 
-    public void addPlayer(Player p) {
-        this.players.add(p.getName());
+    /**
+     * Add a name to the player list via the Player object.
+     *
+     * @param player Player to add to the list
+     */
+    public void addPlayer(Player player) {
+        this.players.add(player.getName());
 
     }
 
-    public void addPlayer(String string) {
-        this.players.add(string);
+    /**
+     * Add a name to the player list.
+     *
+     * @param playerName Name to add to player list.
+     */
+    public void addPlayer(String playerName) {
+        this.players.add(playerName);
 
     }
 
-    public void removePlayer(Player p) {
-        this.players.remove(p.getName());
+    /**
+     * Removes a player from the player list.
+     *
+     * @param player Player to remove from player list.
+     */
+    public void removePlayer(Player player) {
+        this.players.remove(player.getName());
 
     }
 
