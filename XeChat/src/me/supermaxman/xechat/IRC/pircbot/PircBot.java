@@ -774,13 +774,6 @@ public abstract class PircBot implements ReplyConstants {
             } else if (request.equals("FINGER")) {
                 // FINGER request
                 this.onFinger(sourceNick, sourceLogin, sourceHostname, target);
-            } else if ((tokenizer = new StringTokenizer(request)).countTokens() >= 5 && tokenizer.nextToken().equals("DCC")) {
-                // This is a DCC request.
-                boolean success = _dccManager.processRequest(sourceNick, sourceLogin, sourceHostname, request);
-                if (!success) {
-                    // The DccManager didn't know what to do with the line.
-                    this.onUnknown(line);
-                }
             } else {
                 // An unknown CTCP message - ignore it.
                 this.onUnknown(line);
@@ -1861,134 +1854,6 @@ public abstract class PircBot implements ReplyConstants {
 
 
     /**
-     * This method used to be called when a DCC SEND request was sent to the PircBot.
-     * Please use the onIncomingFileTransfer method to receive files, as it
-     * has better functionality and supports resuming.
-     *
-     * @deprecated As of PircBot 1.2.0, use {@link #onIncomingFileTransfer(DccFileTransfer)}
-     */
-    protected void onDccSendRequest(String sourceNick, String sourceLogin, String sourceHostname, String filename, long address, int port, int size) {
-    }
-
-
-    /**
-     * This method used to be called when a DCC CHAT request was sent to the PircBot.
-     * Please use the onIncomingChatRequest method to accept chats, as it
-     * has better functionality.
-     *
-     * @deprecated As of PircBot 1.2.0, use {@link #onIncomingChatRequest(DccChat)}
-     */
-    protected void onDccChatRequest(String sourceNick, String sourceLogin, String sourceHostname, long address, int port) {
-    }
-
-
-    /**
-     * This method is called whenever a DCC SEND request is sent to the PircBot.
-     * This means that a client has requested to send a file to us.
-     * This abstract implementation performs no action, which means that all
-     * DCC SEND requests will be ignored by default. If you wish to receive
-     * the file, then you may override this method and call the receive method
-     * on the DccFileTransfer object, which connects to the sender and downloads
-     * the file.
-     * <p/>
-     * Example:
-     * <pre> public void onIncomingFileTransfer(DccFileTransfer transfer) {
-     *     // Use the suggested file name.
-     *     File file = transfer.getFile();
-     *     // Receive the transfer and save it to the file, allowing resuming.
-     *     transfer.receive(file, true);
-     * }</pre>
-     * <p/>
-     * <b>Warning:</b> Receiving an incoming file transfer will cause a file
-     * to be written to disk. Please ensure that you make adequate security
-     * checks so that this file does not overwrite anything important!
-     * <p/>
-     * Each time a file is received, it happens within a new Thread
-     * in order to allow multiple files to be downloaded by the PircBot
-     * at the same time.
-     * <p/>
-     * If you allow resuming and the file already partly exists, it will
-     * be appended to instead of overwritten.  If resuming is not enabled,
-     * the file will be overwritten if it already exists.
-     * <p/>
-     * You can throttle the speed of the transfer by calling the setPacketDelay
-     * method on the DccFileTransfer object, either before you receive the
-     * file or at any moment during the transfer.
-     * <p/>
-     * The implementation of this method in the PircBot abstract class
-     * performs no actions and may be overridden as required.
-     *
-     * @param transfer The DcccFileTransfer that you may accept.
-     * @see DccFileTransfer
-     * @since PircBot 1.2.0
-     */
-    protected void onIncomingFileTransfer(DccFileTransfer transfer) {
-    }
-
-
-    /**
-     * This method gets called when a DccFileTransfer has finished.
-     * If there was a problem, the Exception will say what went wrong.
-     * If the file was sent successfully, the Exception will be null.
-     * <p/>
-     * Both incoming and outgoing file transfers are passed to this method.
-     * You can determine the type by calling the isIncoming or isOutgoing
-     * methods on the DccFileTransfer object.
-     *
-     * @param transfer The DccFileTransfer that has finished.
-     * @param e        null if the file was transfered successfully, otherwise this
-     *                 will report what went wrong.
-     * @see DccFileTransfer
-     * @since PircBot 1.2.0
-     */
-    protected void onFileTransferFinished(DccFileTransfer transfer, Exception e) {
-    }
-
-
-    /**
-     * This method will be called whenever a DCC Chat request is received.
-     * This means that a client has requested to chat to us directly rather
-     * than via the IRC server. This is useful for sending many lines of text
-     * to and from the bot without having to worry about flooding the server
-     * or any operators of the server being able to "spy" on what is being
-     * said. This abstract implementation performs no action, which means
-     * that all DCC CHAT requests will be ignored by default.
-     * <p/>
-     * If you wish to accept the connection, then you may override this
-     * method and call the accept() method on the DccChat object, which
-     * connects to the sender of the chat request and allows lines to be
-     * sent to and from the bot.
-     * <p/>
-     * Your bot must be able to connect directly to the user that sent the
-     * request.
-     * <p/>
-     * Example:
-     * <pre> public void onIncomingChatRequest(DccChat chat) {
-     *     try {
-     *         // Accept all chat, whoever it's from.
-     *         chat.accept();
-     *         chat.sendLine("Hello");
-     *         String response = chat.readLine();
-     *         chat.close();
-     *     }
-     *     catch (IOException e) {}
-     * }</pre>
-     * <p/>
-     * Each time this method is called, it is called from within a new Thread
-     * so that multiple DCC CHAT sessions can run concurrently.
-     * <p/>
-     * The implementation of this method in the PircBot abstract class
-     * performs no actions and may be overridden as required.
-     *
-     * @param chat A DccChat object that represents the incoming chat request.
-     * @see DccChat
-     * @since PircBot 1.2.0
-     */
-    protected void onIncomingChatRequest(DccChat chat) {
-    }
-
-
-    /**
      * This method is called whenever we receive a VERSION request.
      * This abstract implementation responds with the PircBot's _version string,
      * so if you override this method, be sure to either mimic its functionality
@@ -2806,7 +2671,6 @@ public abstract class PircBot implements ReplyConstants {
     private Hashtable _topics = new Hashtable();
 
     // DccManager to process and handle all DCC events.
-    private DccManager _dccManager = new DccManager(this);
     private int[] _dccPorts = null;
     private InetAddress _dccInetAddress = null;
 
