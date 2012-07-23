@@ -90,8 +90,6 @@ public class KickFilter {
             censored.add("shithead");
             censored.add("shitter");
             censored.add("slut");
-            censored.add("smut");
-            censored.add("spac");
             censored.add("t1tt1e5");
             censored.add("t1tties");
             censored.add("teets");

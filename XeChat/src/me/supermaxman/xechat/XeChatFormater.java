@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import me.supermaxman.xechat.Filters.ColorFilter;
 import me.supermaxman.xechat.Filters.DefaultFilter;
 import me.supermaxman.xechat.Filters.KickFilter;
+import me.supermaxman.xechat.Filters.SpamFilter;
 import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.Filters.PlayerFilter;
 
@@ -21,12 +22,16 @@ public class XeChatFormater {
         m = censorChat(m, p);
         m = PlayerFilter.addColorNames(m, p.getServer(), dcolor);
         m = ColorFilter.addColorChat(m);
+        if(SpamFilter.checkSpam(m, p, channel)){
         if (XeChat.conf.getBoolean("worldinchat")) {
             return (String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m));
 
         } else {
             return (String.format("%s %s %s", ch, name, m));
             
+        }
+        }else{
+			return ChatColor.RED + "Was Kicked For Spam";
         }
     }
     

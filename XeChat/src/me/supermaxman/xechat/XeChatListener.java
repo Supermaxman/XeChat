@@ -50,6 +50,7 @@ public class XeChatListener implements Listener {
         if(!XeChat.isWhispering.containsKey(p)){
         	XeChat.isWhispering.put(p, false);
         }
+        
         if(XeChat.isWhispering.get(p)){
             String m = event.getMessage();
             String name = p.getName();

@@ -37,6 +37,7 @@ public class XeChat extends JavaPlugin {
     public static final HashMap<String, XeChannel> channels = new HashMap<String, XeChannel>();
     public static final HashMap<Player, Player> whisper = new HashMap<Player, Player>();
     public static final HashMap<Player, Boolean> isWhispering = new HashMap<Player, Boolean>();
+    public static final HashMap<Player, String> lastchat = new HashMap<Player, String>();
 
     public static XeChat XE;
 
