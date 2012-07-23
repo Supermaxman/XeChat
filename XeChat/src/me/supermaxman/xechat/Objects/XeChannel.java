@@ -85,28 +85,10 @@ public class XeChannel {
 
     }
 
+    public void removePlayer(Player p) {
+        this.players.remove(p.getName());
 
-//
-//    public String toDBFormat() {
-//        StringBuilder builder = new StringBuilder();
-//        builder.append(getName());
-//        builder.append(":" + getColor());
-//        builder.append(":" + getCreatorName());
-//        builder.append(":" + "Players{");
-//        int i = 0;
-//        for (String s : getPlayers()) {
-//            if (i != 0) {
-//                builder.append("," + s);
-//            } else {
-//                builder.append(s);
-//            }
-//            i++;
-//        }                      w
-//        builder.append("}");
-//
-//
-//        return builder.toString();
-//    }
+    }
 
     public void save() {
         FileConfiguration config = XeChat.conf;
@@ -126,8 +108,5 @@ public class XeChannel {
                 '}';
     }
 
-    public void removePlayer(Player p) {
-        this.players.remove(p.getName());
 
-    }
 }
