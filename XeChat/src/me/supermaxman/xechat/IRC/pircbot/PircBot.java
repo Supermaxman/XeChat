@@ -16,7 +16,6 @@ package me.supermaxman.xechat.IRC.pircbot;
 
 import java.io.*;
 import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 import java.util.Enumeration;
@@ -432,19 +431,6 @@ public abstract class PircBot implements ReplyConstants {
 
 
     /**
-     * Attempt to change the current nick (nickname) of the bot when it
-     * is connected to an IRC server.
-     * After confirmation of a successful nick change, the getNick method
-     * will return the new nick.
-     *
-     * @param newNick The new nick to use.
-     */
-    public final void changeNick(String newNick) {
-        this.sendRawLine("NICK " + newNick);
-    }
-
-
-    /**
      * Identify the bot with NickServ, supplying the appropriate password.
      * Some IRC Networks (such as freenode) require users to <i>register</i> and
      * <i>identify</i> with NickServ before they are able to send private messages
@@ -662,126 +648,6 @@ public abstract class PircBot implements ReplyConstants {
             this.sendRawLine("LIST " + parameters);
         }
     }
-
-
-    /**
-     * Sends a file to another user.  Resuming is supported.
-     * The other user must be able to connect directly to your bot to be
-     * able to receive the file.
-     * <p/>
-     * You may throttle the speed of this file transfer by calling the
-     * setPacketDelay method on the DccFileTransfer that is returned.
-     * <p/>
-     * This method may not be overridden.
-     *
-     * @param file    The file to send.
-     * @param nick    The user to whom the file is to be sent.
-     * @param timeout The number of milliseconds to wait for the recipient to
-     *                acccept the file (we recommend about 120000).
-     * @return The DccFileTransfer that can be used to monitor this transfer.
-     * @see DccFileTransfer
-     * @since 0.9c
-     */
-    public final DccFileTransfer dccSendFile(File file, String nick, int timeout) {
-        DccFileTransfer transfer = new DccFileTransfer(this, _dccManager, file, nick, timeout);
-        transfer.doSend(true);
-        return transfer;
-    }
-
-
-    /**
-     * Receives a file that is being sent to us by a DCC SEND request.
-     * Please use the onIncomingFileTransfer method to receive files.
-     *
-     * @deprecated As of PircBot 1.2.0, use {@link #onIncomingFileTransfer(DccFileTransfer)}
-     */
-    protected final void dccReceiveFile(File file, long address, int port, int size) {
-        throw new RuntimeException("dccReceiveFile is deprecated, please use sendFile");
-    }
-
-
-    /**
-     * Attempts to establish a DCC CHAT session with a client.  This method
-     * issues the connection request to the client and then waits for the
-     * client to respond.  If the connection is successfully made, then a
-     * DccChat object is returned by this method.  If the connection is not
-     * made within the time limit specified by the timeout value, then null
-     * is returned.
-     * <p/>
-     * It is <b>strongly recommended</b> that you call this method within a new
-     * Thread, as it may take a long time to return.
-     * <p/>
-     * This method may not be overridden.
-     *
-     * @param nick    The nick of the user we are trying to establish a chat with.
-     * @param timeout The number of milliseconds to wait for the recipient to
-     *                accept the chat connection (we recommend about 120000).
-     * @return a DccChat object that can be used to send and recieve lines of
-     *         text.  Returns <b>null</b> if the connection could not be made.
-     * @see DccChat
-     * @since PircBot 0.9.8
-     */
-    public final DccChat dccSendChatRequest(String nick, int timeout) {
-        DccChat chat = null;
-        try {
-            ServerSocket ss = null;
-
-            int[] ports = getDccPorts();
-            if (ports == null) {
-                // Use any free port.
-                ss = new ServerSocket(0);
-            } else {
-                for (int i = 0; i < ports.length; i++) {
-                    try {
-                        ss = new ServerSocket(ports[i]);
-                        // Found a port number we could use.
-                        break;
-                    } catch (Exception e) {
-                        // Do nothing; go round and try another port.
-                    }
-                }
-                if (ss == null) {
-                    // No ports could be used.
-                    throw new IOException("All ports returned by getDccPorts() are in use.");
-                }
-            }
-
-            ss.setSoTimeout(timeout);
-            int port = ss.getLocalPort();
-
-            InetAddress inetAddress = getDccInetAddress();
-            if (inetAddress == null) {
-                inetAddress = getInetAddress();
-            }
-            byte[] ip = inetAddress.getAddress();
-            long ipNum = ipToLong(ip);
-
-            sendCTCPCommand(nick, "DCC CHAT chat " + ipNum + " " + port);
-
-            // The client may now connect to us to chat.
-            Socket socket = ss.accept();
-
-            // Close the server socket now that we've finished with it.
-            ss.close();
-
-            chat = new DccChat(this, nick, socket);
-        } catch (Exception e) {
-            // Do nothing.
-        }
-        return chat;
-    }
-
-
-    /**
-     * Attempts to accept a DCC CHAT request by a client.
-     * Please use the onIncomingChatRequest method to receive files.
-     *
-     * @deprecated As of PircBot 1.2.0, use {@link #onIncomingChatRequest(DccChat)}
-     */
-    protected final DccChat dccAcceptChatRequest(String sourceNick, long address, int port) {
-        throw new RuntimeException("dccAcceptChatRequest is deprecated, please use onIncomingChatRequest");
-    }
-
 
     /**
      * Adds a line to the log.  This log is currently output to the standard
