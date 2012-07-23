@@ -15,7 +15,7 @@ public class channelDeleteExecutor extends baseExecutor {
             if (XeChat.channels.containsKey(channelName)) {
                 XeChannel channel = XeChat.channels.get(channelName);
                 if ((channel.getCreatorName().equalsIgnoreCase(player.getName())) || (XeChat.permission.has(player, "xechat.delete.any"))) {
-                    if (channel.isPermenent() == false) {
+                    if (channel.isPermanent() == false) {
                         XeChat.channels.remove(channelName);
                         for (Player p : player.getServer().getOnlinePlayers()) {
                             if (channel.getPlayers().contains(p.getName())) {

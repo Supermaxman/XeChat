@@ -87,10 +87,10 @@ public class XeChat extends JavaPlugin {
 
 
     public void setupChannels() {
-        g.setPermenent(true);
-        l.setPermenent(true);
-        trade.setPermenent(true);
-        z.setPermenent(true);
+        g.setPermanent(true);
+        l.setPermanent(true);
+        trade.setPermanent(true);
+        z.setPermanent(true);
 
         if (conf.isConfigurationSection("channel")) {
             for (Map.Entry<String, Object> entry : conf.getConfigurationSection("channel").getValues(false).entrySet()) {

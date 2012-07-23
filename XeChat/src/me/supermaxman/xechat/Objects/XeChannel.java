@@ -46,12 +46,12 @@ public class XeChannel {
         return name;
     }
 
-    public boolean isPermenent() {
+    public boolean isPermanent() {
         return isPermenent;
     }
 
-    public void setPermenent(boolean b) {
-        this.isPermenent = b;
+    public void setPermanent(boolean permanent) {
+        this.isPermenent = permanent;
     }
 
     public String getCreatorName() {
