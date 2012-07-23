@@ -23,6 +23,7 @@ public class channelCreatorExecutor extends baseExecutor {
             }
             
             if(!XeChat.channels.containsKey(channelName)){
+                XeChat.isWhispering.put(player, false);
                 XeChannel channel = new XeChannel(channelName, name, color);
                 channel.addPlayer(player);
                 XeChat.channels.put(channelName, channel);

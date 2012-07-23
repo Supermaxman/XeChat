@@ -33,6 +33,7 @@ public class staffExecutor extends baseExecutor {
             
         } else if (args.length == 0) {
             XeChat.channelIn.put(player, XeChat.z);
+            XeChat.isWhispering.put(player, false);
             if(!XeChat.z.getPlayers().contains(player.getName())){
 
             XeChat.z.addPlayer(player);

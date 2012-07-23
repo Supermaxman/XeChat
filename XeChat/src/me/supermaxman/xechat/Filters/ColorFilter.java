@@ -1,7 +1,5 @@
 package me.supermaxman.xechat.Filters;
 
-import me.supermaxman.xechat.Objects.XeChannel;
-
 import org.bukkit.ChatColor;
 
 public class ColorFilter {
@@ -9,7 +7,7 @@ public class ColorFilter {
 	
 	
 
-    public static String addColorChat(String m, XeChannel c) {
+    public static String addColorChat(String m) {
     	
     	if(m.contains("&")){
     		for(ChatColor color: ChatColor.values()){

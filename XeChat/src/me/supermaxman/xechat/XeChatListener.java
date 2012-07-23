@@ -17,7 +17,9 @@ public class XeChatListener implements Listener {
     public XeChatListener(XeChat plugin) {
         this.plugin = plugin;
     }
-
+    
+    
+    
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -45,8 +47,20 @@ public class XeChatListener implements Listener {
         if (!XeChat.g.getPlayers().contains(p.getName())) {
             XeChat.g.addPlayer(p);
         }
-        
-        
+        if(!XeChat.isWhispering.containsKey(p)){
+        	XeChat.isWhispering.put(p, false);
+        }
+        if(XeChat.isWhispering.get(p)){
+            String m = event.getMessage();
+            String name = p.getName();
+            Player r = XeChat.whisper.get(p);
+            String message = XeChatFormater.formatWhisper(p, m, name, r);
+            
+            r.sendMessage(message);
+            message = XeChatFormater.formatWhisperTo(p, m, name, r);
+            p.sendMessage(message);
+            event.getRecipients().clear();
+        }else{
         if (XeChat.channelIn.get(p).getName().equalsIgnoreCase("G")) {
             String m = event.getMessage();
             String name = p.getName();
@@ -78,16 +92,18 @@ public class XeChatListener implements Listener {
             }
             p.sendMessage(message);
             event.getRecipients().clear();
-        } else {
-            String m = event.getMessage();
-            String name = p.getName();
-            String world = p.getWorld().getName();
-            XeChannel channel = XeChat.channelIn.get(p);
-            String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
-            channel.sendString(message);
-
-            event.getRecipients().clear();
+        } else {        		
+        		
+        		String m = event.getMessage();
+            	String name = p.getName();
+            	String world = p.getWorld().getName();
+            	XeChannel channel = XeChat.channelIn.get(p);
+            	String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
+            	channel.sendString(message);
+            	
+            	event.getRecipients().clear();
         }
+    }
     }
 
 

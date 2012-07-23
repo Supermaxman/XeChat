@@ -35,6 +35,9 @@ public class XeChat extends JavaPlugin {
     public static XeChannel trade = new XeChannel("trade", "server", ChatColor.BLUE);
     public static XeChannel z = new XeChannel("z", "server", ChatColor.DARK_GREEN);
     public static final HashMap<String, XeChannel> channels = new HashMap<String, XeChannel>();
+    public static final HashMap<Player, Player> whisper = new HashMap<Player, Player>();
+    public static final HashMap<Player, Boolean> isWhispering = new HashMap<Player, Boolean>();
+
     public static XeChat XE;
 
     @Override
@@ -70,6 +73,11 @@ public class XeChat extends JavaPlugin {
         getCommand("leave").setExecutor(new channelLeaveExecutor(this));
         getCommand("channellist").setExecutor(new channelListExecutor(this));
         getCommand("chlist").setExecutor(new channelListExecutor(this));
+        getCommand("tell").setExecutor(new tellExecutor(this));
+        getCommand("w").setExecutor(new tellExecutor(this));
+        getCommand("whisper").setExecutor(new tellExecutor(this));
+        getCommand("r").setExecutor(new replyExecutor(this));
+        getCommand("reply").setExecutor(new replyExecutor(this));
         
         setupIRC();
 
