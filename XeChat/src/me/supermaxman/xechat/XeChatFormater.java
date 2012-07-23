@@ -11,7 +11,7 @@ public class XeChatFormater {
 
     public static String format(Player p, String m, String name, String world, XeChannel channel) {
         ChatColor dcolor = channel.getColor();
-        name = dcolor + XeChat.chat.getPlayerPrefix(p).replaceAll("&", "�") + name + dcolor + ":";
+        name = dcolor + XeChat.chat.getPlayerPrefix(p).replaceAll("&", "\167") + name + dcolor + ":";
 
         String ch = dcolor + "[" + dcolor + channel.getName() + dcolor + "]";
         m = censorChat(m, p);
