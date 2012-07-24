@@ -32,7 +32,7 @@ public class replyExecutor extends baseExecutor {
                 player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, You Are Not Whispering Anyone.");
             }
         } else {
-            player.sendMessage(ChatColor.RED + "[XeChat]: SYNTAX ERROR, Type /r To Respond To The Last Player You Whispered.");
+            player.sendMessage(ChatColor.RED + "[XeChat]: SYNTAX ERROR, Type /r [message] To Respond To The Last Player You Whispered.");
         }
     }
 
