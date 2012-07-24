@@ -23,7 +23,7 @@ public class replyExecutor extends baseExecutor {
                 }
                 String name = player.getName();
 
-
+                
                 String message = XeChatFormater.formatWhisper(player, m, name, r);
                 r.sendMessage(message);
                 message = XeChatFormater.formatWhisperTo(player, m, name, r);
