@@ -64,8 +64,8 @@ public class XeChat extends JavaPlugin {
         setupConfig();
         log.info("All systems go! Version:" + this.getDescription().getVersion());
 
-        getCommand("l").setExecutor(new localExecutor(this));
-        getCommand("g").setExecutor(new globalExecutor(this));
+        getCommand("local").setExecutor(new localExecutor(this));
+        getCommand("global").setExecutor(new globalExecutor(this));
         getCommand("trade").setExecutor(new tradeExecutor(this));
         getCommand("z").setExecutor(new staffExecutor(this));
         getCommand("create").setExecutor(new channelCreatorExecutor(this));
@@ -75,7 +75,6 @@ public class XeChat extends JavaPlugin {
         getCommand("channellist").setExecutor(new channelListExecutor(this));
         getCommand("chlist").setExecutor(new channelListExecutor(this));
         getCommand("tell").setExecutor(new tellExecutor(this));
-        getCommand("w").setExecutor(new tellExecutor(this));
         getCommand("whisper").setExecutor(new tellExecutor(this));
         getCommand("r").setExecutor(new replyExecutor(this));
         getCommand("reply").setExecutor(new replyExecutor(this));

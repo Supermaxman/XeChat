@@ -3,10 +3,10 @@ main: me.supermaxman.xechat.XeChat
 name: XeChat
 version: '1.0.1'
 commands:
-    l:
+    local:
         description: Switch to local chat.
         usage: /<command>
-    g:
+    global:
         description: Switch to global chat.
         usage: /<command>
     trade:
@@ -34,9 +34,6 @@ commands:
         description: Leaves channels
         usage: /<command>
     tell:
-        description: Private whisper
-        usage: /<command>
-    w:
         description: Private whisper
         usage: /<command>
     whisper:

@@ -9,8 +9,8 @@ public class tellExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
         if (args.length >= 2) {
-            if (player.getServer().getPlayerExact(args[0]) != null) {
-                Player r = player.getServer().getPlayerExact(args[0]);
+            if (player.getServer().getPlayer(args[0]) != null) {
+                Player r = player.getServer().getPlayer(args[0]);
                 XeChat.whisper.put(player, r);
                 String m = "";
                 int i = 0;
