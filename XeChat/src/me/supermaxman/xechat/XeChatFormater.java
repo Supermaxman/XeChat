@@ -16,8 +16,10 @@ public class XeChatFormater {
         String ch = dcolor + "[" + dcolor + channel.getName() + dcolor + "]";
         m = censorChat(m, p);
         m = PlayerFilter.addColorNames(m, p.getServer(), dcolor);
-        m = ColorFilter.addColorChat(m);
-        //Completely unnecessary. Handled by ncp.
+        if(p.isOp()){
+        	m = ColorFilter.addColorChat(m);
+        }
+        
         if (SpamFilter.checkSpam(m, p, channel)) {
             if (XeChat.conf.getBoolean("worldinchat")) {
                 return (String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m));
@@ -55,24 +57,22 @@ public class XeChatFormater {
 
 
     public static String censorChat(String m, Player p) {
-
-
+    	
+        ArrayList<String> kcensored = KickFilter.getCensored();
+        
+        for (String s : kcensored) {
+            if (m.toLowerCase().contains(s.toLowerCase())) {
+                m = ChatColor.RED + "Was Kicked For Foul Language";
+                p.kickPlayer(ChatColor.RED + "Kicked For Foul Language.");
+                return m;
+            }
+        }
+        
         ArrayList<String> censored = DefaultFilter.getCensored();
         for (String s : censored) {
             if (m.toLowerCase().contains(s.toLowerCase())) {
                 m = m.toLowerCase().replaceAll(s.toLowerCase(), "****");
 
-            }
-        }
-        //Why not kick on all foul language?
-        ArrayList<String> kcensored = KickFilter.getCensored();
-
-        for (String s : kcensored) {
-            if (m.toLowerCase().contains(s.toLowerCase())) {
-                m = ChatColor.RED + "Was Kicked For Foul Language";
-                p.kickPlayer(ChatColor.RED + "Kicked For Foul Language.");
-
-                break;
             }
         }
 
