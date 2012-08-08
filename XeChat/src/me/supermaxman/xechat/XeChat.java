@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -78,6 +79,8 @@ public class XeChat extends JavaPlugin {
         getCommand("whisper").setExecutor(new tellExecutor(this));
         getCommand("r").setExecutor(new replyExecutor(this));
         getCommand("reply").setExecutor(new replyExecutor(this));
+        getCommand("where").setExecutor(new whereExecutor(this));
+        getCommand("rank").setExecutor(new rankExecutor(this));
 
         setupIRC();
 

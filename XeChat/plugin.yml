@@ -45,8 +45,10 @@ commands:
     reply:
         description: Private reply
         usage: /<command>
-        
-        
-        
-        
+    where:
+        description: Where you are
+        usage: /<command>
+    rank:
+        description: What rank a player is
+        usage: /<command>
         
