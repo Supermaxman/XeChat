@@ -77,6 +77,7 @@ public class XeChat extends JavaPlugin {
         getCommand("chlist").setExecutor(new channelListExecutor(this));
         getCommand("tell").setExecutor(new tellExecutor(this));
         getCommand("whisper").setExecutor(new tellExecutor(this));
+        getCommand("msg").setExecutor(new tellExecutor(this));
         getCommand("r").setExecutor(new replyExecutor(this));
         getCommand("reply").setExecutor(new replyExecutor(this));
         getCommand("where").setExecutor(new whereExecutor(this));
