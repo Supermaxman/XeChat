@@ -36,6 +36,9 @@ commands:
     tell:
         description: Private whisper
         usage: /<command>
+    msg:
+        description: Private whisper
+        usage: /<command>
     whisper:
         description: Private whisper
         usage: /<command>

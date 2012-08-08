@@ -29,6 +29,7 @@ public class tellExecutor extends baseExecutor {
                 message = XeChatFormater.formatWhisperTo(player, m, name, r);
                 player.sendMessage(message);
                 XeChat.whisper.put(r, player);
+                XeChat.whisper.put(player, r);
             } else {
                 player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, The Player " + args[0] + " Is Not Online Or Does Not Exist.");
             }
