@@ -25,19 +25,21 @@ public class XeChatListener implements Listener {
         if (!XeChat.g.getPlayers().contains(player.getName())) {
             XeChat.g.addPlayer(player);
         }
-        event.setJoinMessage(player.getName() + " Joined the game!");
+        event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player)) + player.getName() + ChatColor.YELLOW + " Joined the game.");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getJoinMessage()));
 
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        event.setQuitMessage(event.getPlayer().getName() + " Quit!");
+        Player player = event.getPlayer();
+        event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player)) + player.getName() + ChatColor.YELLOW + " Quit the game.");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getQuitMessage()));
 
     }
-
-    @EventHandler(priority = EventPriority.LOWEST)
+    
+    @SuppressWarnings("deprecation")
+	@EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(PlayerChatEvent event) {
         Player p = event.getPlayer();
         if (!XeChat.channelIn.containsKey(p)) {
