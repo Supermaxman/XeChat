@@ -14,8 +14,8 @@ public class XeChatFormater {
         name = dcolor + ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(p)) + name + dcolor + ":";
 
         String ch = dcolor + "[" + dcolor + channel.getName() + dcolor + "]";
-        m = censorChat(m, p);
         m = PlayerFilter.addColorNames(m, p.getServer(), dcolor);
+        m = censorChat(m, p);
         if(p.isOp()){
         	m = ColorFilter.addColorChat(m);
         }

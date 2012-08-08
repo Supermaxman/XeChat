@@ -199,7 +199,6 @@ public class DefaultFilter {
                 censored.add("pissflaps");
                 censored.add("porn");
                 censored.add("prick");
-                censored.add("pron");
                 censored.add("pusse");
                 censored.add("pussi");
                 censored.add("pussy");
@@ -231,7 +230,6 @@ public class DefaultFilter {
                 censored.add("slut");
                 censored.add("smut");
                 censored.add("snatch");
-                censored.add("spac");
                 censored.add("t1tt1e5");
                 censored.add("t1tties");
                 censored.add("teets");
