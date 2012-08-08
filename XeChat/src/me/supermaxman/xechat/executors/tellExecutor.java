@@ -33,10 +33,10 @@ public class tellExecutor extends baseExecutor {
                 player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, The Player " + args[0] + " Is Not Online Or Does Not Exist.");
             }
         } else if (args.length == 1) {
-            if (player.getServer().getPlayerExact(args[0]) != null) {
-                XeChat.whisper.put(player, player.getServer().getPlayerExact(args[0]));
+            if (player.getServer().getPlayer(args[0]) != null) {
+                XeChat.whisper.put(player, player.getServer().getPlayer(args[0]));
                 XeChat.isWhispering.put(player, true);
-                player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Whispering " +  ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player.getServer().getPlayerExact(args[0]))) + player.getServer().getPlayerExact(args[0]).getName() + ChatColor.AQUA + ".");
+                player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Whispering " +  ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player.getServer().getPlayer(args[0]))) + player.getServer().getPlayer(args[0]).getName() + ChatColor.AQUA + ".");
             } else {
                 player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, The Player " + args[0] + " Is Not Online Or Does Not Exist.");
             }
