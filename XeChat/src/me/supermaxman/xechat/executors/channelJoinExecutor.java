@@ -16,11 +16,26 @@ public class channelJoinExecutor extends baseExecutor {
                 XeChat.isWhispering.put(player, false);
                 XeChannel channel = XeChat.channels.get(channelName);
                 if (!channel.getPlayers().contains(player.getName())) {
-
-                    channel.addPlayer(player);
-                    XeChat.channelIn.put(player, channel);
-
-                    player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + channel.getColor() + channel.getName() + ChatColor.AQUA + ".");
+                	if(channel.isPrivate()){
+                		if(args.length>1){
+                			String pass = args[1];
+                			if(pass.equalsIgnoreCase(channel.getPassword())){
+                        		channel.addPlayer(player);
+                        		XeChat.channelIn.put(player, channel);
+                            	
+                            	player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + channel.getColor() + channel.getName() + ChatColor.AQUA + ".");
+                			}else{
+                                player.sendMessage(ChatColor.RED + "[XeChat]: Incorrect Password For  " + channelName + ".");
+                			}
+                		}else{
+                            player.sendMessage(ChatColor.RED + "[XeChat]: The Channel " + channelName + " Requires A Password.");
+                		}
+                	}else{
+                		channel.addPlayer(player);
+                		XeChat.channelIn.put(player, channel);
+                    	
+                    	player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + channel.getColor() + channel.getName() + ChatColor.AQUA + ".");
+                	}
                 } else {
                     XeChat.channelIn.put(player, channel);
 

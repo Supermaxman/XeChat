@@ -105,7 +105,9 @@ public class XeChat extends JavaPlugin {
                 for (String players : cs.getStringList("players")) {
                     xeChannel.addPlayer(players);
                 }
-
+                if(cs.getString("password")!=null){
+                	xeChannel.setPrivate(true, cs.getString("password"));
+                }
                 channels.put(entry.getKey(), xeChannel);
 
 //                XeChannel derp = new XeChannel(entry.getKey());
