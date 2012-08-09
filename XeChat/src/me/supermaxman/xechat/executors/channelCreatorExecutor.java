@@ -15,7 +15,11 @@ public class channelCreatorExecutor extends baseExecutor {
             ChatColor color = ChatColor.WHITE;
             if (args.length >= 2) {
                 try {
-                    color = ChatColor.valueOf(args[1].toUpperCase());
+                    if (args[1].toUpperCase().equalsIgnoreCase("MAGIC")){
+                        player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, Specified Chat Color Is Not Allowed, Defaulting to White.");
+                    }else{
+                    	color = ChatColor.valueOf(args[1].toUpperCase());
+                    }
                 } catch (IllegalArgumentException e) {
                     player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, Specified Chat Color Does Not Exist, Defaulting to White.");
                 }
