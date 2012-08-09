@@ -32,7 +32,7 @@ public class tradeExecutor extends baseExecutor {
 
         } else if (args.length == 0) {
             XeChat.channelIn.put(player, XeChat.trade);
-            XeChat.whisper.remove(player);
+            XeChat.isWhispering.put(player, false);
             if (!XeChat.trade.getPlayers().contains(player.getName())) {
 
                 XeChat.trade.addPlayer(player);

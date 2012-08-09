@@ -25,6 +25,9 @@ public class XeChatListener implements Listener {
         if (!XeChat.g.getPlayers().contains(player.getName())) {
             XeChat.g.addPlayer(player);
         }
+        if (!XeChat.channelIn.containsKey(player)) {
+            XeChat.channelIn.put(player, XeChat.g);
+        }
         event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player)) + player.getName() + ChatColor.YELLOW + " Joined the game.");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getJoinMessage()));
 
@@ -102,7 +105,7 @@ public class XeChatListener implements Listener {
                 XeChannel channel = XeChat.channelIn.get(p);
                 String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
                 channel.sendString(message);
-
+                
                 event.getRecipients().clear();
             }
         }
