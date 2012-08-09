@@ -39,7 +39,7 @@ public class XeChat extends JavaPlugin {
     public static final HashMap<Player, Player> whisper = new HashMap<Player, Player>();
     public static final HashMap<Player, Boolean> isWhispering = new HashMap<Player, Boolean>();
     public static final HashMap<Player, String> lastchat = new HashMap<Player, String>();
-
+    
     public static XeChat XE;
 
     @Override
@@ -64,7 +64,7 @@ public class XeChat extends JavaPlugin {
         getServer().getPluginManager().registerEvents(Listener, this);
         setupConfig();
         log.info("All systems go! Version:" + this.getDescription().getVersion());
-
+        
         getCommand("local").setExecutor(new localExecutor(this));
         getCommand("global").setExecutor(new globalExecutor(this));
         getCommand("trade").setExecutor(new tradeExecutor(this));
