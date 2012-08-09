@@ -13,7 +13,7 @@ public class globalExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
         if (args.length > 0) {
-            player.sendMessage(ChatColor.RED + "[XeChat]: Error, type /g to talk in global.");
+            player.sendMessage(ChatColor.RED + "[XeChat]: Error, type /global to talk in global.");
         } else if (args.length == 0) {
             XeChat.isWhispering.put(player, false);
             XeChat.channelIn.put(player, XeChat.g);

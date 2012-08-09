@@ -28,10 +28,10 @@ commands:
         description: Leaves channels
         usage: /<command>
     chlist:
-        description: Leaves channels
+        description: Lists channels
         usage: /<command>
     channellist:
-        description: Leaves channels
+        description: Lists channels
         usage: /<command>
     tell:
         description: Private whisper
