@@ -73,7 +73,7 @@ public class XeChatListener implements Listener {
                 String message = XeChatFormater.format(p, m, name, world, XeChat.g);
 
                 event.setFormat(message);
-
+                
                 if (!m.equalsIgnoreCase("u00a74u00a75u00a73u00a74v|1")) {
                     XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(name + ": " + m));
                 }
