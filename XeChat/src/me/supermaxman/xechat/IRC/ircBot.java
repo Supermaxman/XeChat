@@ -10,9 +10,9 @@ import org.bukkit.plugin.Plugin;
 import java.io.IOException;
 
 public class ircBot extends PircBot {
-    ChatColor color = ChatColor.AQUA;
+    final ChatColor color = ChatColor.AQUA;
     Plugin herp = null;
-    String nick = XeChat.conf.getString("IRC.nick");
+    final String nick = XeChat.conf.getString("IRC.nick");
 
     public ircBot(Plugin derp) {
         setName(nick);

@@ -30,10 +30,10 @@ public class XeChat extends JavaPlugin {
     public static Chat chat = null;
     public static final HashMap<Player, XeChannel> channelIn = new HashMap<Player, XeChannel>();
     static ircBot bot;
-    public static XeChannel g = new XeChannel("G", "server", ChatColor.WHITE);
-    public static XeChannel l = new XeChannel("l", "server", ChatColor.YELLOW);
-    public static XeChannel trade = new XeChannel("trade", "server", ChatColor.BLUE);
-    public static XeChannel z = new XeChannel("z", "server", ChatColor.DARK_GREEN);
+    public static final XeChannel g = new XeChannel("G", "server", ChatColor.WHITE);
+    public static final XeChannel l = new XeChannel("l", "server", ChatColor.YELLOW);
+    public static final XeChannel trade = new XeChannel("trade", "server", ChatColor.BLUE);
+    public static final XeChannel z = new XeChannel("z", "server", ChatColor.DARK_GREEN);
     public static final HashMap<String, XeChannel> channels = new HashMap<String, XeChannel>();
     public static final HashMap<Player, Player> whisper = new HashMap<Player, Player>();
     public static final HashMap<Player, Boolean> isWhispering = new HashMap<Player, Boolean>();

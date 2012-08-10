@@ -1020,8 +1020,7 @@ public abstract class PircBot implements ReplyConstants {
      * @see User
      * @since PircBot 1.0.0
      */
-    protected void onUserList(String channel, User[] users) {
-    }
+    protected abstract void onUserList(String channel, User[] users);
 
 
     /**
@@ -1051,8 +1050,7 @@ public abstract class PircBot implements ReplyConstants {
      * @param hostname The hostname of the person who sent the private message.
      * @param message  The actual message.
      */
-    protected void onPrivateMessage(String sender, String login, String hostname, String message) {
-    }
+    protected abstract void onPrivateMessage(String sender, String login, String hostname, String message);
 
 
     /**
@@ -1182,8 +1180,7 @@ public abstract class PircBot implements ReplyConstants {
      * @param topic   The topic for the channel.
      * @deprecated As of 1.2.0, replaced by {@link #onTopic(String, String, String, long, boolean)}
      */
-    protected void onTopic(String channel, String topic) {
-    }
+    protected abstract void onTopic(String channel, String topic);
 
 
     /**
@@ -1221,9 +1218,7 @@ public abstract class PircBot implements ReplyConstants {
      * @param topic     The topic for this channel.
      * @see #listChannels() listChannels
      */
-    protected void onChannelInfo(String channel, int userCount, String topic) {
-    }
-
+    protected abstract void onChannelInfo(String channel, int userCount, String topic);
 
     /**
      * Called when the mode of a channel is set.  We process this in
@@ -2652,7 +2647,7 @@ public abstract class PircBot implements ReplyConstants {
     private String _password = null;
 
     // Outgoing message stuff.
-    private Queue _outQueue = new Queue();
+    private final Queue _outQueue = new Queue();
     private long _messageDelay = 1000;
 
     // A Hashtable of channels that points to a selfreferential Hashtable of
@@ -2661,7 +2656,7 @@ public abstract class PircBot implements ReplyConstants {
 
     // A Hashtable to temporarily store channel topics when we join them
     // until we find out who set that topic.
-    private Hashtable _topics = new Hashtable();
+    private final Hashtable _topics = new Hashtable();
 
     // DccManager to process and handle all DCC events.
     private int[] _dccPorts = null;
@@ -2676,5 +2671,5 @@ public abstract class PircBot implements ReplyConstants {
     private String _version = "PircBot " + VERSION + " Java IRC Bot - www.jibble.org";
     private String _finger = "You ought to be arrested for fingering a bot!";
 
-    private String _channelPrefixes = "#&+!";
+    private final String _channelPrefixes = "#&+!";
 }
