@@ -2590,7 +2590,7 @@ public abstract class PircBot implements ReplyConstants {
      */
     private void removeAllChannels() {
         synchronized (_channels) {
-            _channels = new Hashtable();
+            _channels.clear();
         }
     }
 
@@ -2661,7 +2661,7 @@ public abstract class PircBot implements ReplyConstants {
 
     // A Hashtable of channels that points to a selfreferential Hashtable of
     // User objects (used to remember which users are in which channels).
-    private Hashtable _channels = new Hashtable();
+    private final Hashtable _channels = new Hashtable();
 
     // A Hashtable to temporarily store channel topics when we join them
     // until we find out who set that topic.

@@ -58,7 +58,6 @@ public class OutputThread extends Thread {
         if (line.length() > bot.getMaxLineLength() - 2) {
             line = line.substring(0, bot.getMaxLineLength() - 2);
         }
-        synchronized (bwriter) {
             try {
                 bwriter.write(line + "\r\n");
                 bwriter.flush();
@@ -66,7 +65,6 @@ public class OutputThread extends Thread {
             } catch (Exception e) {
                 // Silent response - just lose the line.
             }
-        }
     }
 
 

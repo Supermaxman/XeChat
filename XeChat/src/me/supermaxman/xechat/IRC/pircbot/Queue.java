@@ -139,6 +139,6 @@ public class Queue {
     }
 
 
-    private Vector _queue = new Vector();
+    private final Vector _queue = new Vector();
 
 }

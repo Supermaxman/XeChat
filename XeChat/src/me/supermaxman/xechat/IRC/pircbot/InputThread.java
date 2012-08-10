@@ -152,7 +152,7 @@ public class InputThread extends Thread {
         }
     }
 
-    private PircBot _bot = null;
+    private final PircBot _bot;
     private Socket _socket = null;
     private BufferedReader _breader = null;
     private BufferedWriter _bwriter = null;
