@@ -137,11 +137,11 @@ public class XeChat extends JavaPlugin {
         try {
             bot.connect("127.0.0.1");
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (NickAlreadyInUseException e) {
             e.printStackTrace();
         } catch (IrcException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         bot.joinChannel(conf.getString("IRC.Channel"));
         bot.setVerbose(false);

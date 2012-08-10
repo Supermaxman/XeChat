@@ -37,22 +37,21 @@ public class ircBot extends PircBot {
         try {
             reconnect();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (NickAlreadyInUseException e) {
             e.printStackTrace();
         } catch (IrcException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
     @Override
     protected void onServerResponse(int code, String response) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     protected void onUserList(String channel, User[] users) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
@@ -104,7 +103,7 @@ public class ircBot extends PircBot {
 
     @Override
     protected void onTopic(String channel, String topic) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
@@ -116,7 +115,7 @@ public class ircBot extends PircBot {
 
     @Override
     protected void onChannelInfo(String channel, int userCount, String topic) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
@@ -131,7 +130,7 @@ public class ircBot extends PircBot {
 
     @Override
     protected void onOp(String channel, String sourceNick, String sourceLogin, String sourceHostname, String recipient) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     void sendMessageToMain(String message) {
