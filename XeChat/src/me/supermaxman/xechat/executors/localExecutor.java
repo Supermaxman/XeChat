@@ -32,7 +32,7 @@ public class localExecutor extends baseExecutor {
             String message = XeChatFormater.format(player, m, name, world, XeChat.l);
 
 
-            for (Entity e : player.getNearbyEntities((Integer) XeChat.conf.get("localdistence"), 300, (Integer) XeChat.conf.get("localdistence"))) {
+            for (Entity e : player.getNearbyEntities(XeChat.conf.getInt("localdistence"), 300, XeChat.conf.getInt("localdistence"))) {
                 if (e instanceof Player) {
                     Player r = (Player) e;
 
