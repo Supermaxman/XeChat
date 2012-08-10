@@ -3,6 +3,7 @@ package me.supermaxman.xechat.IRC;
 import me.supermaxman.xechat.IRC.pircbot.IrcException;
 import me.supermaxman.xechat.IRC.pircbot.NickAlreadyInUseException;
 import me.supermaxman.xechat.IRC.pircbot.PircBot;
+import me.supermaxman.xechat.IRC.pircbot.User;
 import me.supermaxman.xechat.XeChat;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
@@ -46,6 +47,11 @@ public class ircBot extends PircBot {
 
     @Override
     protected void onServerResponse(int code, String response) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    protected void onUserList(String channel, User[] users) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -97,10 +103,20 @@ public class ircBot extends PircBot {
     }
 
     @Override
+    protected void onTopic(String channel, String topic) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     protected void onTopic(String channel, String topic, String setBy, long date, boolean changed) {
         if (changed) {
             sendMessageToMain("* Topic was changed to \"" + topic + "\" by " + setBy);
         }
+    }
+
+    @Override
+    protected void onChannelInfo(String channel, int userCount, String topic) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
