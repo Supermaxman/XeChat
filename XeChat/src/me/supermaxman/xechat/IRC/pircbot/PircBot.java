@@ -2638,7 +2638,9 @@ public abstract class PircBot implements ReplyConstants {
             } else {
                 // just in case ...
                 newUser = new User("", nick);
-                users.put(newUser, newUser);
+                if (users != null) {
+                    users.put(newUser, newUser);
+                }
             }
         }
     }
