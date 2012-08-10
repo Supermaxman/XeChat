@@ -54,4 +54,7 @@ commands:
     rank:
         description: What rank a player is
         usage: /<command>
+    ch:
+        description: For the noobs
+        usage: /<command>
         

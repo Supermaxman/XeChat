@@ -43,6 +43,9 @@ public class XeChatListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
+        if(event.isCancelled()){
+          return;
+        }
         Player p = event.getPlayer();
         if (!XeChat.channelIn.containsKey(p)) {
             XeChat.channelIn.put(p, XeChat.g);
