@@ -11,7 +11,6 @@ public class tellExecutor extends baseExecutor {
         if (args.length >= 2) {
             if (player.getServer().getPlayer(args[0]) != null) {
                 Player r = player.getServer().getPlayer(args[0]);
-                XeChat.whisper.put(player, r);
                 String m = "";
                 int i = 0;
                 for (String s : args) {
@@ -28,14 +27,15 @@ public class tellExecutor extends baseExecutor {
                 r.sendMessage(message);
                 message = XeChatFormater.formatWhisperTo(player, m, name, r);
                 player.sendMessage(message);
-                XeChat.whisper.put(r, player);
                 XeChat.whisper.put(player, r);
+                XeChat.whisper.put(r, player);
             } else {
                 player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, The Player " + args[0] + " Is Not Online Or Does Not Exist.");
             }
         } else if (args.length == 1) {
             if (player.getServer().getPlayer(args[0]) != null) {
                 XeChat.whisper.put(player, player.getServer().getPlayer(args[0]));
+                XeChat.whisper.put(player.getServer().getPlayer(args[0]), player);
                 XeChat.isWhispering.put(player, true);
                 player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Whispering " + ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player.getServer().getPlayer(args[0]))) + player.getServer().getPlayer(args[0]).getName() + ChatColor.AQUA + ".");
             } else {
