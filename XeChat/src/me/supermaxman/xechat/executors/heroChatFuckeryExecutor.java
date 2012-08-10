@@ -16,7 +16,7 @@ public class heroChatFuckeryExecutor extends baseExecutor {
     protected void run(Player player, String[] args) {
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "[XeChat]: Herp");
-        } else if (args.length < 0) {
+        } else if (args.length > 0) {
             String[] args2 = Arrays.copyOfRange(args, 1, args.length);
             if(args[0].equalsIgnoreCase("join")){
                 XeChat.joinExecutor.run(player,args2);
