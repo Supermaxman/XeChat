@@ -64,9 +64,9 @@ public class XeChat extends JavaPlugin {
             this.setEnabled(false);
             return;
         }
+        setupConfig();
         setupChannels();
         getServer().getPluginManager().registerEvents(Listener, this);
-        setupConfig();
         log.info("All systems go! Version:" + this.getDescription().getVersion());
 
         getCommand("local").setExecutor(new localExecutor(this));
@@ -98,7 +98,7 @@ public class XeChat extends JavaPlugin {
         l.setPermanent(true);
         trade.setPermanent(true);
         z.setPermanent(true);
-
+        z.setPrivate(true, conf.getString("staffpass"));
         if (conf.isConfigurationSection("channel")) {
             for (Map.Entry<String, Object> entry : conf.getConfigurationSection("channel").getValues(false).entrySet()) {
 //                log.info(entry.getKey());
@@ -157,6 +157,9 @@ public class XeChat extends JavaPlugin {
     void setupConfig() {
         if (conf.get("worldinchat") == null) {
             conf.set("worldinchat", false);
+        }
+        if (conf.get("staffpass") == null) {
+            conf.set("staffpass", "sexytime");
         }
         if (conf.get("defaultChannel") == null) {
             conf.set("defaultChannel", "G");
