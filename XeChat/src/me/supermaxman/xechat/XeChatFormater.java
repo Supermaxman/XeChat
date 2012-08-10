@@ -16,8 +16,8 @@ public class XeChatFormater {
         String ch = dcolor + "[" + dcolor + channel.getName() + dcolor + "]";
         m = PlayerFilter.addColorNames(m, p.getServer(), dcolor);
         m = censorChat(m, p);
-        if(p.isOp()){
-        	m = ColorFilter.addColorChat(m);
+        if (p.isOp()) {
+            m = ColorFilter.addColorChat(m);
         }
         m = m.replaceAll("%", "%%");
         if (SpamFilter.checkSpam(m, p, channel)) {
@@ -57,9 +57,9 @@ public class XeChatFormater {
 
 
     public static String censorChat(String m, Player p) {
-    	
+
         ArrayList<String> kickCensor = KickFilter.getCensored();
-        
+
         for (String s : kickCensor) {
             if (m.toLowerCase().contains(s.toLowerCase())) {
                 m = ChatColor.RED + "Was Kicked For Foul Language";
@@ -67,12 +67,12 @@ public class XeChatFormater {
                 return m;
             }
         }
-        
+
         ArrayList<String> censored = DefaultFilter.getCensored();
         for (String s : censored) {
             if (m.toLowerCase().contains(s.toLowerCase())) {
                 String stars = "";
-                for(int i = 1; i <= s.length(); i ++){
+                for (int i = 1; i <= s.length(); i++) {
                     stars += "*";
                 }
 

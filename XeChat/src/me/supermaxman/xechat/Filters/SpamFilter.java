@@ -1,16 +1,13 @@
 package me.supermaxman.xechat.Filters;
 
 import me.supermaxman.xechat.Objects.XeChannel;
-import me.supermaxman.xechat.XeChat;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class SpamFilter {
 
     public static boolean checkSpam(String m, final Player p, XeChannel ch) {
         //Does not prevent worlds end or other spam bots, will cause major leaving spam.
-    	/*
+        /*
         m = ch.getName() + ":" + m;
         if (XeChat.lastchat.containsKey(p)) {
             if (m.equalsIgnoreCase(XeChat.lastchat.get(p))) {

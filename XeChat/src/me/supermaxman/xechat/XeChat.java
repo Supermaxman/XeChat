@@ -11,7 +11,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -39,7 +38,7 @@ public class XeChat extends JavaPlugin {
     public static final HashMap<Player, Player> whisper = new HashMap<Player, Player>();
     public static final HashMap<Player, Boolean> isWhispering = new HashMap<Player, Boolean>();
     public static final HashMap<Player, String> lastchat = new HashMap<Player, String>();
-    
+
     public static XeChat XE;
 
     @Override
@@ -64,7 +63,7 @@ public class XeChat extends JavaPlugin {
         getServer().getPluginManager().registerEvents(Listener, this);
         setupConfig();
         log.info("All systems go! Version:" + this.getDescription().getVersion());
-        
+
         getCommand("local").setExecutor(new localExecutor(this));
         getCommand("global").setExecutor(new globalExecutor(this));
         getCommand("trade").setExecutor(new tradeExecutor(this));
@@ -105,8 +104,8 @@ public class XeChat extends JavaPlugin {
                 for (String players : cs.getStringList("players")) {
                     xeChannel.addPlayer(players);
                 }
-                if(cs.getString("password")!=null){
-                	xeChannel.setPrivate(true, cs.getString("password"));
+                if (cs.getString("password") != null) {
+                    xeChannel.setPrivate(true, cs.getString("password"));
                 }
                 channels.put(entry.getKey(), xeChannel);
 

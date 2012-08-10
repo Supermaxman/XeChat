@@ -1,8 +1,8 @@
 package me.supermaxman.xechat.Filters;
 
-import java.util.ArrayList;
-
 import me.supermaxman.xechat.XeChat;
+
+import java.util.ArrayList;
 
 public class KickFilter {
 

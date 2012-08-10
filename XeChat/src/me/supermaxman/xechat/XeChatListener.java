@@ -40,8 +40,8 @@ public class XeChatListener implements Listener {
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getQuitMessage()));
 
     }
-    
-	@EventHandler(priority = EventPriority.LOWEST)
+
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player p = event.getPlayer();
         if (!XeChat.channelIn.containsKey(p)) {
@@ -53,7 +53,7 @@ public class XeChatListener implements Listener {
         if (!XeChat.isWhispering.containsKey(p)) {
             XeChat.isWhispering.put(p, false);
         }
-        
+
         if (XeChat.isWhispering.get(p)) {
             String m = event.getMessage();
             String name = p.getName();
@@ -75,7 +75,7 @@ public class XeChatListener implements Listener {
                 String message = XeChatFormater.format(p, m, name, world, XeChat.g);
 
                 event.setFormat(message);
-                
+
                 if (!m.equalsIgnoreCase("u00a74u00a75u00a73u00a74v|1")) {
                     XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(name + ": " + m));
                 }
@@ -104,7 +104,7 @@ public class XeChatListener implements Listener {
                 XeChannel channel = XeChat.channelIn.get(p);
                 String message = XeChatFormater.format(p, m, name, world, XeChat.channelIn.get(p));
                 channel.sendString(message);
-                
+
                 event.getRecipients().clear();
             }
         }

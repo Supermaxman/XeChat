@@ -17,6 +17,7 @@ public class XeChannel {
     private boolean isPermenent = false;
     private boolean isPrivate = false;
     private String pass = null;
+
     public XeChannel(String channelName, String channelCreator, ChatColor channelColor) {
         name = channelName;
         creator = channelCreator;
@@ -41,20 +42,20 @@ public class XeChannel {
             XeChat.log.warning("Dont send Null to a channel derp.");
         }
     }
-    
+
     public void setPrivate(boolean b, String pass) {
         this.isPrivate = b;
         this.pass = pass;
     }
-    
+
     public boolean isPrivate() {
         return isPrivate;
     }
-    
+
     public String getPassword() {
         return pass;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -123,7 +124,7 @@ public class XeChannel {
         config.set("channel." + name + ".creator", creator);
         config.set("channel." + name + ".color", color.getChar());
         config.set("channel." + name + ".players", players);
-        if(this.isPrivate){
+        if (this.isPrivate) {
             config.set("channel." + name + ".password", pass);
         }
         XeChat.XE.saveConfig();
