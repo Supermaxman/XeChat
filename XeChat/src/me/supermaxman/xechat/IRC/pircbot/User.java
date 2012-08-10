@@ -154,8 +154,8 @@ public class User {
     }
 
 
-    private String _prefix;
-    private String _nick;
-    private String _lowerNick;
+    private final String _prefix;
+    private final String _nick;
+    private final String _lowerNick;
 
 }

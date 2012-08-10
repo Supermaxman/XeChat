@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public class XeChannel {
 
 
-    private String name;
+    private final String name;
     private String creator;
     private ChatColor color;
-    private ArrayList<String> players = new ArrayList<String>();
+    private final ArrayList<String> players = new ArrayList<String>();
     private boolean isPermenent = false;
     private boolean isPrivate = false;
     private String pass = null;
