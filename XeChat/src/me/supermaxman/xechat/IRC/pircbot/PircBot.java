@@ -144,8 +144,8 @@ public abstract class PircBot implements ReplyConstants {
 
         _inetAddress = socket.getLocalAddress();
 
-        InputStreamReader inputStreamReader = null;
-        OutputStreamWriter outputStreamWriter = null;
+        InputStreamReader inputStreamReader;
+        OutputStreamWriter outputStreamWriter;
         if (getEncoding() != null) {
             // Assume the specified encoding is valid for this JVM.
             inputStreamReader = new InputStreamReader(socket.getInputStream(), getEncoding());
@@ -170,7 +170,7 @@ public abstract class PircBot implements ReplyConstants {
         _inputThread = new InputThread(this, socket, breader, bwriter);
 
         // Read stuff back from the server to see if we connected.
-        String line = null;
+        String line;
         int tries = 1;
         while ((line = breader.readLine()) != null) {
 
@@ -2252,6 +2252,7 @@ public abstract class PircBot implements ReplyConstants {
      *          supported.
      * @since PircBot 1.0.4
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void setEncoding(String charset) throws UnsupportedEncodingException {
         // Just try to see if the charset is supported first...
         "".getBytes(charset);
@@ -2470,7 +2471,7 @@ public abstract class PircBot implements ReplyConstants {
      * @since PircBot 1.0.0
      */
     public final String[] getChannels() {
-        String[] channels = new String[0];
+        String[] channels;
         synchronized (_channels) {
             channels = new String[_channels.size()];
             Enumeration enumeration = _channels.keys();
