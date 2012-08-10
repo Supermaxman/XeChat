@@ -14,12 +14,13 @@ public class channelJoinExecutor extends baseExecutor {
             String channelName = args[0];
 
 
-            if (args.length == 1) {
+            if (args.length >= 1) {
                 XeChat.isWhispering.put(player, false);
                 XeChannel channel = null;
                 for (Map.Entry<String, XeChannel> channelEntry : XeChat.channels.entrySet()) {
                     if(channelName.equalsIgnoreCase(channelEntry.getKey())){
                         channel = channelEntry.getValue();
+                        break;
                     }
                 }
 
