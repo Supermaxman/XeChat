@@ -19,11 +19,10 @@ public class XeChatFormater {
         if(p.isOp()){
         	m = ColorFilter.addColorChat(m);
         }
-        m = m.replace('%', ' ');
-        //% break chat, @TehRainbowGuy help!
+        m = m.replaceAll("%", "%%");
         if (SpamFilter.checkSpam(m, p, channel)) {
             if (XeChat.conf.getBoolean("worldinchat")) {
-                return (String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m));
+                return String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m);
 
             } else {
                 return (String.format("%s %s %s", ch, name, m));

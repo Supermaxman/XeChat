@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -41,9 +42,8 @@ public class XeChatListener implements Listener {
 
     }
     
-    @SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerChat(PlayerChatEvent event) {
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player p = event.getPlayer();
         if (!XeChat.channelIn.containsKey(p)) {
             XeChat.channelIn.put(p, XeChat.g);
