@@ -20,14 +20,13 @@ public class heroChatFuckeryExecutor extends baseExecutor {
             String[] args2 = Arrays.copyOfRange(args, 1, args.length);
             if(args[0].equalsIgnoreCase("join")){
                 XeChat.joinExecutor.run(player,args2);
-             //leave
             }
             else if(args[0].equalsIgnoreCase("leave"))
             {
                XeChat.channelLeaveExecutor.run(player,args2);
             }
             else {
-                XeChat.joinExecutor.run(player,args2);
+                XeChat.joinExecutor.run(player,args);
             }
         }
     }
