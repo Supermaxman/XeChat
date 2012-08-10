@@ -176,6 +176,7 @@ public class XeChat extends JavaPlugin {
     }
 
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean setupPermissions() {
         RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
         if (permissionProvider != null) {
@@ -185,6 +186,7 @@ public class XeChat extends JavaPlugin {
         return false;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean setupChat() {
         RegisteredServiceProvider<Chat> chatRegisteredServiceProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
         if (chatRegisteredServiceProvider != null) {

@@ -45,6 +45,11 @@ public class ircBot extends PircBot {
     }
 
     @Override
+    protected void onServerResponse(int code, String response) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     protected void onPrivateMessage(String sender, String login, String hostname, String message) {
     }
 
@@ -106,6 +111,11 @@ public class ircBot extends PircBot {
     @Override
     protected void onUserMode(String targetNick, String sourceNick, String sourceLogin, String sourceHostname, String mode) {
         sendMessageToMain("* " + targetNick + "'s mode was set to " + mode + " by " + sourceNick);
+    }
+
+    @Override
+    protected void onOp(String channel, String sourceNick, String sourceLogin, String sourceHostname, String recipient) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     void sendMessageToMain(String message) {

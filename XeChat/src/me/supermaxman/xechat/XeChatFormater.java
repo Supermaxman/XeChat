@@ -19,11 +19,10 @@ public class XeChatFormater {
         if(p.isOp()){
         	m = ColorFilter.addColorChat(m);
         }
-        m = m.replace('%', ' ');
-        //% break chat, @TehRainbowGuy help!
+        m = m.replaceAll("%", "%%");
         if (SpamFilter.checkSpam(m, p, channel)) {
             if (XeChat.conf.getBoolean("worldinchat")) {
-                return (String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m));
+                return String.format("%s %s %s %s", ch, ChatColor.WHITE + "[" + world + "]", name, m);
 
             } else {
                 return (String.format("%s %s %s", ch, name, m));
@@ -59,9 +58,9 @@ public class XeChatFormater {
 
     public static String censorChat(String m, Player p) {
     	
-        ArrayList<String> kcensored = KickFilter.getCensored();
+        ArrayList<String> kickCensor = KickFilter.getCensored();
         
-        for (String s : kcensored) {
+        for (String s : kickCensor) {
             if (m.toLowerCase().contains(s.toLowerCase())) {
                 m = ChatColor.RED + "Was Kicked For Foul Language";
                 p.kickPlayer(ChatColor.RED + "Kicked For Foul Language.");
@@ -72,7 +71,12 @@ public class XeChatFormater {
         ArrayList<String> censored = DefaultFilter.getCensored();
         for (String s : censored) {
             if (m.toLowerCase().contains(s.toLowerCase())) {
-                m = m.toLowerCase().replaceAll(s.toLowerCase(), "****");
+                String stars = "";
+                for(int i = 1; i <= s.length(); i ++){
+                    stars += "*";
+                }
+
+                m = m.toLowerCase().replaceAll(s.toLowerCase(), stars);
 
             }
         }
