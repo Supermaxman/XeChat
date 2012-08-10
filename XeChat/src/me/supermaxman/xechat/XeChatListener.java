@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.kitteh.tag.PlayerReceiveNameTagEvent;
 
 public class XeChatListener implements Listener {
     final XeChat plugin;
@@ -111,6 +112,11 @@ public class XeChatListener implements Listener {
                 event.getRecipients().clear();
             }
         }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onNameTag(PlayerReceiveNameTagEvent event) {
+      event.setTag(ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(event.getNamedPlayer())) + event.getNamedPlayer().getName());
     }
 
 
