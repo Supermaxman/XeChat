@@ -5,15 +5,21 @@ import me.supermaxman.xechat.XeChat;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
+
 public class channelLeaveExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
         if (args.length > 0) {
             String channelName = args[0];
 
-
-            if (XeChat.channels.containsKey(channelName)) {
-                XeChannel channel = XeChat.channels.get(channelName);
+            XeChannel channel = null;
+            for (Map.Entry<String, XeChannel> channelEntry : XeChat.channels.entrySet()) {
+                if(channelName.equalsIgnoreCase(channelEntry.getKey())){
+                    channel = channelEntry.getValue();
+                }
+            }
+            if (channel != null) {
                 if (channel.getPlayers().contains(player.getName())) {
                     channel.removePlayer(player);
                     XeChat.channelIn.put(player, XeChat.g);
