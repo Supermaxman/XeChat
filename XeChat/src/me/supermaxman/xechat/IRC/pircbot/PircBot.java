@@ -713,18 +713,16 @@ public abstract class PircBot implements ReplyConstants {
             } else {
 
                 if (tokenizer.hasMoreTokens()) {
-                    String token = command;
 
                     int code = -1;
                     try {
-                        code = Integer.parseInt(token);
+                        code = Integer.parseInt(command);
                     } catch (NumberFormatException e) {
                         // Keep the existing value.
                     }
 
                     if (code != -1) {
-                        String errorStr = token;
-                        String response = line.substring(line.indexOf(errorStr, senderInfo.length()) + 4, line.length());
+                        String response = line.substring(line.indexOf(command, senderInfo.length()) + 4, line.length());
                         this.processServerResponse(code, response);
                         // Return from the method.
                         return;
@@ -733,7 +731,7 @@ public abstract class PircBot implements ReplyConstants {
                         // It must be a nick without login and hostname.
                         // (or maybe a NOTICE or suchlike from the server)
                         sourceNick = senderInfo;
-                        target = token;
+                        target = command;
                     }
                 } else {
                     // We don't know what this line means.
@@ -786,9 +784,8 @@ public abstract class PircBot implements ReplyConstants {
             this.onPrivateMessage(sourceNick, sourceLogin, sourceHostname, line.substring(line.indexOf(" :") + 2));
         } else if (command.equals("JOIN")) {
             // Someone is joining a channel.
-            String channel = target;
-            this.addUser(channel, new User("", sourceNick));
-            this.onJoin(channel, sourceNick, sourceLogin, sourceHostname);
+            this.addUser(target, new User("", sourceNick));
+            this.onJoin(target, sourceNick, sourceLogin, sourceHostname);
         } else if (command.equals("PART")) {
             // Someone is parting from a channel.
             this.removeUser(target, sourceNick);
@@ -798,13 +795,12 @@ public abstract class PircBot implements ReplyConstants {
             this.onPart(target, sourceNick, sourceLogin, sourceHostname);
         } else if (command.equals("NICK")) {
             // Somebody is changing their nick.
-            String newNick = target;
-            this.renameUser(sourceNick, newNick);
+            this.renameUser(sourceNick, target);
             if (sourceNick.equals(this.getNick())) {
                 // Update our nick if it was us that changed nick.
-                this.setNick(newNick);
+                this.setNick(target);
             }
-            this.onNickChange(sourceNick, sourceLogin, sourceHostname, newNick);
+            this.onNickChange(sourceNick, sourceLogin, sourceHostname, target);
         } else if (command.equals("NOTICE")) {
             // Someone is sending a notice.
             this.onNotice(sourceNick, sourceLogin, sourceHostname, target, line.substring(line.indexOf(" :") + 2));
@@ -1247,7 +1243,6 @@ public abstract class PircBot implements ReplyConstants {
 
         if (_channelPrefixes.indexOf(target.charAt(0)) >= 0) {
             // The mode of a channel is being changed.
-            String channel = target;
             StringTokenizer tok = new StringTokenizer(mode);
             String[] params = new String[tok.countTokens()];
 
@@ -1269,87 +1264,86 @@ public abstract class PircBot implements ReplyConstants {
                     pn = atPos;
                 } else if (atPos == 'o') {
                     if (pn == '+') {
-                        this.updateUser(channel, OP_ADD, params[p]);
-                        onOp(channel, sourceNick, sourceLogin, sourceHostname, params[p]);
+                        this.updateUser(target, OP_ADD, params[p]);
+                        onOp(target, sourceNick, sourceLogin, sourceHostname, params[p]);
                     } else {
-                        this.updateUser(channel, OP_REMOVE, params[p]);
-                        onDeop(channel, sourceNick, sourceLogin, sourceHostname, params[p]);
+                        this.updateUser(target, OP_REMOVE, params[p]);
+                        onDeop(target, sourceNick, sourceLogin, sourceHostname, params[p]);
                     }
                     p++;
                 } else if (atPos == 'v') {
                     if (pn == '+') {
-                        this.updateUser(channel, VOICE_ADD, params[p]);
-                        onVoice(channel, sourceNick, sourceLogin, sourceHostname, params[p]);
+                        this.updateUser(target, VOICE_ADD, params[p]);
+                        onVoice(target, sourceNick, sourceLogin, sourceHostname, params[p]);
                     } else {
-                        this.updateUser(channel, VOICE_REMOVE, params[p]);
-                        onDeVoice(channel, sourceNick, sourceLogin, sourceHostname, params[p]);
+                        this.updateUser(target, VOICE_REMOVE, params[p]);
+                        onDeVoice(target, sourceNick, sourceLogin, sourceHostname, params[p]);
                     }
                     p++;
                 } else if (atPos == 'k') {
                     if (pn == '+') {
-                        onSetChannelKey(channel, sourceNick, sourceLogin, sourceHostname, params[p]);
+                        onSetChannelKey(target, sourceNick, sourceLogin, sourceHostname, params[p]);
                     } else {
-                        onRemoveChannelKey(channel, sourceNick, sourceLogin, sourceHostname, params[p]);
+                        onRemoveChannelKey(target, sourceNick, sourceLogin, sourceHostname, params[p]);
                     }
                     p++;
                 } else if (atPos == 'l') {
                     if (pn == '+') {
-                        onSetChannelLimit(channel, sourceNick, sourceLogin, sourceHostname, Integer.parseInt(params[p]));
+                        onSetChannelLimit(target, sourceNick, sourceLogin, sourceHostname, Integer.parseInt(params[p]));
                         p++;
                     } else {
-                        onRemoveChannelLimit(channel, sourceNick, sourceLogin, sourceHostname);
+                        onRemoveChannelLimit(target, sourceNick, sourceLogin, sourceHostname);
                     }
                 } else if (atPos == 'b') {
                     if (pn == '+') {
-                        onSetChannelBan(channel, sourceNick, sourceLogin, sourceHostname, params[p]);
+                        onSetChannelBan(target, sourceNick, sourceLogin, sourceHostname, params[p]);
                     } else {
-                        onRemoveChannelBan(channel, sourceNick, sourceLogin, sourceHostname, params[p]);
+                        onRemoveChannelBan(target, sourceNick, sourceLogin, sourceHostname, params[p]);
                     }
                     p++;
                 } else if (atPos == 't') {
                     if (pn == '+') {
-                        onSetTopicProtection(channel, sourceNick, sourceLogin, sourceHostname);
+                        onSetTopicProtection(target, sourceNick, sourceLogin, sourceHostname);
                     } else {
-                        onRemoveTopicProtection(channel, sourceNick, sourceLogin, sourceHostname);
+                        onRemoveTopicProtection(target, sourceNick, sourceLogin, sourceHostname);
                     }
                 } else if (atPos == 'n') {
                     if (pn == '+') {
-                        onSetNoExternalMessages(channel, sourceNick, sourceLogin, sourceHostname);
+                        onSetNoExternalMessages(target, sourceNick, sourceLogin, sourceHostname);
                     } else {
-                        onRemoveNoExternalMessages(channel, sourceNick, sourceLogin, sourceHostname);
+                        onRemoveNoExternalMessages(target, sourceNick, sourceLogin, sourceHostname);
                     }
                 } else if (atPos == 'i') {
                     if (pn == '+') {
-                        onSetInviteOnly(channel, sourceNick, sourceLogin, sourceHostname);
+                        onSetInviteOnly(target, sourceNick, sourceLogin, sourceHostname);
                     } else {
-                        onRemoveInviteOnly(channel, sourceNick, sourceLogin, sourceHostname);
+                        onRemoveInviteOnly(target, sourceNick, sourceLogin, sourceHostname);
                     }
                 } else if (atPos == 'm') {
                     if (pn == '+') {
-                        onSetModerated(channel, sourceNick, sourceLogin, sourceHostname);
+                        onSetModerated(target, sourceNick, sourceLogin, sourceHostname);
                     } else {
-                        onRemoveModerated(channel, sourceNick, sourceLogin, sourceHostname);
+                        onRemoveModerated(target, sourceNick, sourceLogin, sourceHostname);
                     }
                 } else if (atPos == 'p') {
                     if (pn == '+') {
-                        onSetPrivate(channel, sourceNick, sourceLogin, sourceHostname);
+                        onSetPrivate(target, sourceNick, sourceLogin, sourceHostname);
                     } else {
-                        onRemovePrivate(channel, sourceNick, sourceLogin, sourceHostname);
+                        onRemovePrivate(target, sourceNick, sourceLogin, sourceHostname);
                     }
                 } else if (atPos == 's') {
                     if (pn == '+') {
-                        onSetSecret(channel, sourceNick, sourceLogin, sourceHostname);
+                        onSetSecret(target, sourceNick, sourceLogin, sourceHostname);
                     } else {
-                        onRemoveSecret(channel, sourceNick, sourceLogin, sourceHostname);
+                        onRemoveSecret(target, sourceNick, sourceLogin, sourceHostname);
                     }
                 }
             }
 
-            this.onMode(channel, sourceNick, sourceLogin, sourceHostname, mode);
+            this.onMode(target, sourceNick, sourceLogin, sourceHostname, mode);
         } else {
             // The mode of a user is being changed.
-            String nick = target;
-            this.onUserMode(nick, sourceNick, sourceLogin, sourceHostname, mode);
+            this.onUserMode(target, sourceNick, sourceLogin, sourceHostname, mode);
         }
     }
 
