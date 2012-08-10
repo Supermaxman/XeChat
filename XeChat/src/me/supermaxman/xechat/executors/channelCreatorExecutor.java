@@ -1,5 +1,7 @@
 package me.supermaxman.xechat.executors;
 
+import java.util.Map;
+
 import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.XeChat;
 import org.bukkit.ChatColor;
@@ -25,7 +27,14 @@ public class channelCreatorExecutor extends baseExecutor {
                     player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, Specified Chat Color Does Not Exist, Defaulting to White.");
                 }
             }
-            if (!XeChat.channels.containsKey(channelName)) {
+            boolean canCreate = true;
+            for (Map.Entry<String, XeChannel> channelEntry : XeChat.channels.entrySet()) {
+                if(channelName.equalsIgnoreCase(channelEntry.getKey())){
+                   	canCreate = false;
+                   	break;
+                }
+            }
+            if (canCreate) {
                 int amt = 0;
                 int max = 0;
                 if (XeChat.permission.has(player, "xechat.channels.create")) {
