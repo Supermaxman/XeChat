@@ -96,7 +96,6 @@ public class XeChannel {
      */
     public void addPlayer(Player player) {
         this.players.add(player.getName());
-
     }
 
     /**
@@ -106,7 +105,6 @@ public class XeChannel {
      */
     public void addPlayer(String playerName) {
         this.players.add(playerName);
-
     }
 
     /**

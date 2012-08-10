@@ -49,9 +49,14 @@ public class XeChat extends JavaPlugin {
         saveLoadedChannels();
     }
 
+    public static channelJoinExecutor joinExecutor;
+    public static channelLeaveExecutor channelLeaveExecutor;
+
     @Override
     public void onEnable() {
         XE = this;
+        joinExecutor = new channelJoinExecutor(this);
+        channelLeaveExecutor = new channelLeaveExecutor(this);
         log = getLogger();
         conf = getConfig();
         if (!setupPermissions() || !setupChat()) {
@@ -69,9 +74,9 @@ public class XeChat extends JavaPlugin {
         getCommand("trade").setExecutor(new tradeExecutor(this));
         getCommand("z").setExecutor(new staffExecutor(this));
         getCommand("create").setExecutor(new channelCreatorExecutor(this));
-        getCommand("join").setExecutor(new channelJoinExecutor(this));
+        getCommand("join").setExecutor(joinExecutor);
         getCommand("delete").setExecutor(new channelDeleteExecutor(this));
-        getCommand("leave").setExecutor(new channelLeaveExecutor(this));
+        getCommand("leave").setExecutor(channelLeaveExecutor);
         getCommand("channellist").setExecutor(new channelListExecutor(this));
         getCommand("chlist").setExecutor(new channelListExecutor(this));
         getCommand("tell").setExecutor(new tellExecutor(this));
@@ -81,7 +86,7 @@ public class XeChat extends JavaPlugin {
         getCommand("reply").setExecutor(new replyExecutor(this));
         getCommand("where").setExecutor(new whereExecutor(this));
         getCommand("rank").setExecutor(new rankExecutor(this));
-
+        getCommand("ch").setExecutor(new heroChatFuckeryExecutor(this));
         setupIRC();
 
 
