@@ -15,6 +15,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.kitteh.tag.PlayerReceiveNameTagEvent;
 
+import java.text.DecimalFormat;
+
 public class XeChatListener implements Listener {
     final XeChat plugin;
 
@@ -42,7 +44,15 @@ public class XeChatListener implements Listener {
         String msg = event.getDeathMessage();
 //        msg = msg.replaceAll(event.getEntity().getName(), ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(event.getEntity())) + event.getEntity().getName())
         msg = PlayerFilter.addColorNames(msg, ChatColor.RED);
+        if(event.getEntity().getKiller() != null){
+            Player killer = event.getEntity().getKiller();
+            msg += " with "
+                    +  killer.getItemInHand().getType().name().replaceAll("_", " ").toLowerCase()
+                    + " from "
+                    + new DecimalFormat("#.#").format(killer.getLocation().distance(event.getEntity().getLocation())) + "m";
 
+
+        }
         event.setDeathMessage(msg);
     }
 
