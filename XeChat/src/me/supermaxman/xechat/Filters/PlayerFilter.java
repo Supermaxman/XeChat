@@ -21,8 +21,16 @@ public class PlayerFilter {
 //        }
         String m2 = "";
         for (String s : m.split(" ")) {
+            boolean added = false;
             for (Player player : Bukkit.getOnlinePlayers()) {
-                m2 += s.replaceAll(player.getName(), ColorUtils.getColoredName(player)) + c + " ";
+                if(s.equalsIgnoreCase(player.getName())){
+                    m2 += s.replaceAll(player.getName(), ColorUtils.getColoredName(player)) + c + " ";
+                    added = true;
+                }
+            }
+            if(!added){
+                m2 += s + c + " ";
+
             }
         }
 
