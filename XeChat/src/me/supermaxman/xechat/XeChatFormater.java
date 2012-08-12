@@ -2,6 +2,7 @@ package me.supermaxman.xechat;
 
 import me.supermaxman.xechat.Filters.*;
 import me.supermaxman.xechat.Objects.XeChannel;
+import me.supermaxman.xechat.utils.ColorUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -11,10 +12,10 @@ public class XeChatFormater {
 
     public static String format(Player p, String m, String name, String world, XeChannel channel) {
         ChatColor dcolor = channel.getColor();
-        name = dcolor + ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(p)) + name + dcolor + ":";
+        name = dcolor + ColorUtils.getColoredName(p) + dcolor + ":";
 
         String ch = dcolor + "[" + dcolor + channel.getName() + dcolor + "]";
-        m = PlayerFilter.addColorNames(m, p.getServer(), dcolor);
+        m = PlayerFilter.addColorNames(m, dcolor);
         m = censorChat(m, p);
         if (p.isOp()) {
             m = ColorFilter.addColorChat(m);
@@ -39,18 +40,18 @@ public class XeChatFormater {
 
         String ch = dcolor + "[" + dcolor + "From" + "]";
         m = censorChat(m, p);
-        m = PlayerFilter.addColorNames(m, p.getServer(), dcolor);
+        m = PlayerFilter.addColorNames(m, dcolor);
         m = ColorFilter.addColorChat(m);
         return (String.format("%s %s %s", ch, name, m));
     }
 
     public static String formatWhisperTo(Player p, String m, String name, Player r) {
         ChatColor dcolor = ChatColor.LIGHT_PURPLE;
-        name = dcolor + ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(r)) + r.getName() + dcolor + ":";
+        name = dcolor + ColorUtils.getColoredName(r) + dcolor + ":";
 
         String ch = dcolor + "[" + dcolor + "To" + "]";
         m = censorChat(m, p);
-        m = PlayerFilter.addColorNames(m, p.getServer(), dcolor);
+        m = PlayerFilter.addColorNames(m, dcolor);
         m = ColorFilter.addColorChat(m);
         return (String.format("%s %s %s", ch, name, m));
     }

@@ -1,7 +1,8 @@
 package me.supermaxman.xechat;
 
+import me.supermaxman.xechat.Filters.PlayerFilter;
 import me.supermaxman.xechat.Objects.XeChannel;
-import org.bukkit.Bukkit;
+import me.supermaxman.xechat.utils.ColorUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -31,7 +32,7 @@ public class XeChatListener implements Listener {
         if (!XeChat.channelIn.containsKey(player)) {
             XeChat.channelIn.put(player, XeChat.g);
         }
-        event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player)) + player.getName() + ChatColor.YELLOW + " Joined the game.");
+        event.setJoinMessage(ColorUtils.getColoredName(player) + ChatColor.YELLOW + " Joined the game.");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getJoinMessage()));
 
     }
@@ -40,9 +41,7 @@ public class XeChatListener implements Listener {
     public void onDie(PlayerDeathEvent event){
         String msg = event.getDeathMessage();
 //        msg = msg.replaceAll(event.getEntity().getName(), ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(event.getEntity())) + event.getEntity().getName())
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            msg = msg.replaceAll(event.getEntity().getName(), ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player)) + player.getName() + ChatColor.RESET) ;
-        }
+        msg = PlayerFilter.addColorNames(msg, ChatColor.RED);
 
         event.setDeathMessage(msg);
     }
@@ -50,7 +49,7 @@ public class XeChatListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player)) + player.getName() + ChatColor.YELLOW + " Quit the game.");
+        event.setQuitMessage(ColorUtils.getColoredName(player) + ChatColor.YELLOW + " Quit the game.");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getQuitMessage()));
 
     }
@@ -129,7 +128,7 @@ public class XeChatListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onNameTag(PlayerReceiveNameTagEvent event) {
-      event.setTag(ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(event.getNamedPlayer())) + event.getNamedPlayer().getName());
+      event.setTag(ColorUtils.getColoredName(event.getNamedPlayer()));
     }
 
 
