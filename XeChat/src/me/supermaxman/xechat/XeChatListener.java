@@ -3,6 +3,8 @@ package me.supermaxman.xechat;
 import me.supermaxman.xechat.Filters.PlayerFilter;
 import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.utils.ColorUtils;
+import me.supermaxman.xechat.utils.StringUtils;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -46,7 +48,7 @@ public class XeChatListener implements Listener {
         msg = PlayerFilter.addColorNames(msg, ChatColor.RED);
         if(event.getEntity().getKiller() != null){
             Player killer = event.getEntity().getKiller();
-            msg += " with "
+            msg += " with " + StringUtils.getVowelCase(killer.getItemInHand().getType().name().replaceAll("_", " ").toLowerCase())
                     +  killer.getItemInHand().getType().name().replaceAll("_", " ").toLowerCase()
                     + " from "
                     + new DecimalFormat("#.#").format(killer.getLocation().distance(event.getEntity().getLocation())) + "m";
