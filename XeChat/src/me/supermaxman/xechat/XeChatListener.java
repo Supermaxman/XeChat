@@ -1,12 +1,14 @@
 package me.supermaxman.xechat;
 
 import me.supermaxman.xechat.Objects.XeChannel;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -32,6 +34,17 @@ public class XeChatListener implements Listener {
         event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player)) + player.getName() + ChatColor.YELLOW + " Joined the game.");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getJoinMessage()));
 
+    }
+
+    @EventHandler
+    public void onDie(PlayerDeathEvent event){
+        String msg = event.getDeathMessage();
+//        msg = msg.replaceAll(event.getEntity().getName(), ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(event.getEntity())) + event.getEntity().getName())
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            msg = msg.replaceAll(event.getEntity().getName(), ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(player)) + player.getName() + ChatColor.RESET) ;
+        }
+
+        event.setDeathMessage(msg);
     }
 
     @EventHandler
