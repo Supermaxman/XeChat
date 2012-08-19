@@ -22,12 +22,18 @@ public class XeChannel {
         name = channelName;
         creator = channelCreator;
         color = channelColor;
+        save();
     }
 
     public XeChannel(String name) {
         this.name = name;
     }
-
+    public void delete(){
+        FileConfiguration config = XeChat.conf;
+        config.set("channel." + name, null);
+        
+        XeChat.XE.saveConfig();
+    }
 
     public void sendString(String m) {
         if (m != null) {
