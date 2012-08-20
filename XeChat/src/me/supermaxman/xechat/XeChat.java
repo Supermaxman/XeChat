@@ -7,7 +7,10 @@ import me.supermaxman.xechat.Objects.XeChannel;
 import me.supermaxman.xechat.executors.*;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -38,7 +41,9 @@ public class XeChat extends JavaPlugin {
     public static final HashMap<Player, Player> whisper = new HashMap<Player, Player>();
     public static final HashMap<Player, Boolean> isWhispering = new HashMap<Player, Boolean>();
     public static final HashMap<Player, String> lastchat = new HashMap<Player, String>();
-
+    public static final HashMap<Player, Location> lastLoc = new HashMap<Player, Location>();
+    public static int repeatTask;
+    public static final int kickTime = 15;
     public static XeChat XE;
 
     @Override
@@ -47,6 +52,7 @@ public class XeChat extends JavaPlugin {
         bot.disconnect();
         bot.dispose();
         saveLoadedChannels();
+        stopAfkKicker();
     }
 
     public static channelJoinExecutor joinExecutor;
@@ -88,10 +94,32 @@ public class XeChat extends JavaPlugin {
         getCommand("rank").setExecutor(new rankExecutor(this));
         getCommand("ch").setExecutor(new heroChatFuckeryExecutor(this));
         setupIRC();
-
-
+        
+        startAfkKicker();
     }
-
+    
+    public void startAfkKicker(){
+        repeatTask = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(XE, new Runnable() {
+            public void run() {
+            	for (Player p : XE.getServer().getOnlinePlayers()){
+            		if(lastLoc.containsKey(p)){
+            			if((p.getLocation().getX() == lastLoc.get(p).getX())&&
+            				(p.getLocation().getY() == lastLoc.get(p).getY())&&
+            				(p.getLocation().getZ() == lastLoc.get(p).getZ())&&
+            				(p.getLocation().getWorld().getName().equals(lastLoc.get(p).getWorld().getName()))){
+            				p.kickPlayer(ChatColor.RED+"Kicked for being AFK for "+kickTime+" minutes.");
+            			}
+            		}
+            		lastLoc.put(p, p.getLocation());
+            	}
+            }
+        }, 1, kickTime*60*20);
+    }
+    public void stopAfkKicker(){
+        Bukkit.getServer().getScheduler().cancelTask(repeatTask);
+    }
+    
+    
 
     public void setupChannels() {
         g.setPermanent(true);

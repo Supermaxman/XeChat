@@ -22,7 +22,6 @@ public class XeChannel {
         name = channelName;
         creator = channelCreator;
         color = channelColor;
-        save();
     }
 
     public XeChannel(String name) {
