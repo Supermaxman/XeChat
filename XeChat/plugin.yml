@@ -6,6 +6,9 @@ commands:
     local:
         description: Switch to local chat.
         usage: /<command>
+    chreload:
+        description: Reloads XeChat Config.
+        usage: /<command>
     global:
         description: Switch to global chat.
         usage: /<command>

@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Date: 21/07/12
  * Time: 05:20
  */
-public class heroChatFuckeryExecutor extends baseExecutor {
+public class heroChatExecutor extends baseExecutor {
     @Override
     protected void run(Player player, String[] args) {
         if (args.length == 0) {
@@ -31,7 +31,7 @@ public class heroChatFuckeryExecutor extends baseExecutor {
         }
     }
 
-    public heroChatFuckeryExecutor(XeChat XE) {
+    public heroChatExecutor(XeChat XE) {
         super(XE);
     }
 }

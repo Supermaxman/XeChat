@@ -92,7 +92,9 @@ public class XeChat extends JavaPlugin {
         getCommand("reply").setExecutor(new replyExecutor(this));
         getCommand("where").setExecutor(new whereExecutor(this));
         getCommand("rank").setExecutor(new rankExecutor(this));
-        getCommand("ch").setExecutor(new heroChatFuckeryExecutor(this));
+        getCommand("ch").setExecutor(new heroChatExecutor(this));
+        getCommand("chreload").setExecutor(new configReloaderExecutor(this));
+        
         setupIRC();
         
         startAfkKicker();

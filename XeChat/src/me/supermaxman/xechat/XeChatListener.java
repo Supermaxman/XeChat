@@ -51,7 +51,7 @@ public class XeChatListener implements Listener {
             msg += " with " + StringUtils.getVowelCase(killer.getItemInHand().getType().name().replaceAll("_", " ").toLowerCase())
                     +  killer.getItemInHand().getType().name().replaceAll("_", " ").toLowerCase()
                     + " from "
-                    + new DecimalFormat("#.#").format(killer.getLocation().distance(event.getEntity().getLocation())) + "m";
+                    + new DecimalFormat("#.#").format(killer.getLocation().distance(event.getEntity().getLocation())) + " blocks away.";
 
 
         }
@@ -63,7 +63,7 @@ public class XeChatListener implements Listener {
         Player player = event.getPlayer();
         event.setQuitMessage(ColorUtils.getColoredName(player) + ChatColor.YELLOW + " Quit the game.");
         XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(event.getQuitMessage()));
-
+        
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
