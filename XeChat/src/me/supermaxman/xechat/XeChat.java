@@ -51,7 +51,8 @@ public class XeChat extends JavaPlugin {
         log.info("Disabled.");
         bot.disconnect();
         bot.dispose();
-        saveLoadedChannels();
+        //saveLoadedChannels();
+        //to try and fix the config reset
         stopAfkKicker();
     }
 

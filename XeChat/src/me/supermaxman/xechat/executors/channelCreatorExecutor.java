@@ -65,8 +65,9 @@ public class channelCreatorExecutor extends baseExecutor {
                             String pass = args[1];
                             channel.setPrivate(true, pass);
                         }
-
+                        
                         channel.addPlayer(player);
+                        channel.save();
                         XeChat.channels.put(channelName, channel);
                         XeChat.channelIn.put(player, channel);
                         player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Talking In " + channel.getColor() + channel.getName() + ChatColor.AQUA + ".");
