@@ -75,13 +75,13 @@ public class XeChatListener implements Listener {
         if (!XeChat.channelIn.containsKey(p)) {
             XeChat.channelIn.put(p, XeChat.g);
         }
-        if (!XeChat.g.getPlayers().contains(p.getName())) {
-            XeChat.g.addPlayer(p);
-        }
+        
+        
+        
         if (!XeChat.isWhispering.containsKey(p)) {
             XeChat.isWhispering.put(p, false);
         }
-
+        
         if (XeChat.isWhispering.get(p)) {
             String m = event.getMessage();
             String name = p.getName();
@@ -103,7 +103,12 @@ public class XeChatListener implements Listener {
                 String message = XeChatFormater.format(p, m, name, world, XeChat.g);
 
                 event.setFormat(message);
-
+                event.getRecipients().clear();
+                for(String s:XeChat.g.getPlayers()){
+                	if(XeChat.XE.getServer().getPlayerExact(s)!=null){
+                		event.getRecipients().add(XeChat.XE.getServer().getPlayerExact(s));
+                	}
+                }
                 if (!m.equalsIgnoreCase("u00a74u00a75u00a73u00a74v|1")) {
                     XeChat.bot.sendMessage(XeChat.conf.getString("IRC.Channel"), ChatColor.stripColor(name + ": " + m));
                 }

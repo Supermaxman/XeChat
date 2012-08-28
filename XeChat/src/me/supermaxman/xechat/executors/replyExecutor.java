@@ -32,7 +32,13 @@ public class replyExecutor extends baseExecutor {
                 player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, You Are Not Whispering Anyone.");
             }
         } else {
-            player.sendMessage(ChatColor.RED + "[XeChat]: SYNTAX ERROR, Type /r [message] To Respond To The Last Player You Whispered.");
+            if (XeChat.whisper.containsKey(player)) {
+                Player r = XeChat.whisper.get(player);
+                XeChat.isWhispering.put(player, true);
+                player.sendMessage(ChatColor.AQUA + "[XeChat]: Now Whispering " + ChatColor.translateAlternateColorCodes('&', XeChat.chat.getPlayerPrefix(r)) + r.getName() + ChatColor.AQUA + ".");
+            }else{
+                player.sendMessage(ChatColor.RED + "[XeChat]: ERROR, You Are Not Whispering Anyone.");
+            }
         }
     }
 
