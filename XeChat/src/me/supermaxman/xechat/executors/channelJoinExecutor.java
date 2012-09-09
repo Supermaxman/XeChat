@@ -30,7 +30,7 @@ public class channelJoinExecutor extends baseExecutor {
                         if (channel.isPrivate()) {
                             if (args.length > 1) {
                                 String pass = args[1];
-                                if (pass.equalsIgnoreCase(channel.getPassword())) {
+                                if (pass.equalsIgnoreCase(channel.getPassword())||player.isOp()||XeChat.permission.has(player, "xechat.channel.joinall")) {
                                     channel.addPlayer(player);
                                     XeChat.channelIn.put(player, channel);
 
